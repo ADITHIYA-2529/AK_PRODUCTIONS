@@ -1,0 +1,76 @@
+import { defineType, defineField } from 'sanity'
+
+export default defineType({
+  name: 'gallery',
+  title: 'Gallery',
+  type: 'document',
+
+  fields: [
+    defineField({
+      name: 'title',
+      title: 'Title',
+      type: 'string',
+    }),
+
+    defineField({
+      name: 'category',
+      title: 'Category',
+      type: 'string',
+    }),
+
+    defineField({
+      name: 'date',
+      title: 'Date',
+      type: 'date',
+    }),
+
+    defineField({
+      name: 'aspectRatio',
+      title: 'Aspect Ratio',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Square', value: 'square' },
+          { title: 'Portrait', value: 'portrait' },
+          { title: 'Landscape', value: 'landscape' },
+        ],
+      },
+    }),
+
+    defineField({
+      name: 'altText',
+      title: 'Alt Text (for accessibility)',
+      type: 'string',
+    }),
+
+    defineField({
+      name: 'description',
+      title: 'Description (optional)',
+      type: 'text',
+      rows: 2,
+    }),
+
+    defineField({
+      name: 'displayOrder',
+      title: 'Display Order',
+      type: 'number',
+      initialValue: 10,
+    }),
+
+    defineField({
+      name: 'featured',
+      title: 'Featured (showcase in home gallery)',
+      type: 'boolean',
+      initialValue: false,
+    }),
+
+    defineField({
+      name: 'image',
+      title: 'Image',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+    }),
+  ],
+})
