@@ -146,7 +146,7 @@ export default function Home() {
   // Hero image — siteSettings first, then first about image, then CDN fallback
   const heroImg = siteSettings?.homeHeroImage
     ? urlFor(siteSettings.homeHeroImage).width(1200).url()
-    : 'https://images.unsplash.com/photo-1519741497674-611481863552?w=1920&q=85&auto=format&fit=crop'
+    : 'https://unsplash.com/photos/a-couple-holding-hands-while-standing-next-to-each-other-JRiyNjRtyiI'
 
   return (
     <div className="bg-brand-bg text-brand-body overflow-hidden">
