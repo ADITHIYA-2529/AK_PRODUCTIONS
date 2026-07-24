@@ -32,7 +32,7 @@ export default function Services() {
   const [activeCategory,   setActiveCategory]   = useState('All')
   const [services,         setServices]         = useState<Service[]>([])
   const [loading,          setLoading]          = useState(true)
-  const [servicesHeroImage,setServicesHeroImage]= useState('/services-hero-stage.png')
+  const [servicesHeroImage,setServicesHeroImage]= useState('https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=1920&q=85&auto=format&fit=crop')
 
   useEffect(() => {
     Promise.all([getAllServices(), getSiteSettings()])
@@ -44,7 +44,7 @@ export default function Services() {
         if (data && data.length > 0) {
           const mapped = data.map((s: any) => {
             const currentSlug = s.slug?.current || s.slug || ''
-            const fallbackImg = SERVICES.find(f => f.slug === currentSlug)?.heroImage || '/services-hero-stage.png'
+            const fallbackImg = SERVICES.find(f => f.slug === currentSlug)?.heroImage || 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=1920&q=85&auto=format&fit=crop'
             return {
               id:              s._id,
               slug:            currentSlug,

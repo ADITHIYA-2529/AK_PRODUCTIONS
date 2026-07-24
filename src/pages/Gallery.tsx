@@ -17,7 +17,7 @@ export default function Gallery() {
   const [visibleCount,   setVisibleCount]   = useState(12)
   const [galleryItems,   setGalleryItems]   = useState<GalleryItem[]>([])
   const [loading,        setLoading]        = useState(true)
-  const [galleryHeroImage, setGalleryHeroImage] = useState('/gallery-hero-wedding.png')
+  const [galleryHeroImage, setGalleryHeroImage] = useState('https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=1920&q=85&auto=format&fit=crop')
 
   useEffect(() => {
     Promise.all([getAllGallery(), getSiteSettings()])
@@ -29,7 +29,7 @@ export default function Gallery() {
         if (data && data.length > 0) {
           const mapped = data.map((item: any) => ({
             id: item._id,
-            src: item.image ? urlFor(item.image).width(800).url() : 'https://images.pexels.com/photos/1444442/pexels-photo-1444442.jpeg?auto=compress&cs=tinysrgb&w=800',
+            src: item.image ? urlFor(item.image).width(800).url() : 'https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80&auto=format&fit=crop',
             category: item.category || 'Other',
             title: item.title || '',
             aspectRatio: item.aspectRatio || 'square',

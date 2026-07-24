@@ -116,10 +116,10 @@ export default function Home() {
   const aboutImages: string[] = about?.images?.length
     ? about.images.map((img: any) => urlFor(img).url())
     : [
-      '/hero-grand-event.png',
-      '/about-story-planning.png',
-      '/about-story-decoration.png',
-      '/about-hero-team.png',
+      'https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=1200&q=85&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=1200&q=85&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&q=85&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1544078751-58fee2d8a03b?w=1200&q=85&auto=format&fit=crop',
     ]
 
   const phone = contact?.phone || '+91 96772 03639'
@@ -146,7 +146,7 @@ export default function Home() {
   // Hero image — siteSettings first, then first about image, then CDN fallback
   const heroImg = siteSettings?.homeHeroImage
     ? urlFor(siteSettings.homeHeroImage).width(1200).url()
-    : (aboutImages[0] || '/hero-grand-event.png')
+    : 'https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=1920&q=85&auto=format&fit=crop'
 
   return (
     <div className="bg-brand-bg text-brand-body overflow-hidden">
@@ -701,7 +701,7 @@ export default function Home() {
         {/* Background image */}
         <div
           className="absolute inset-0 bg-cover bg-center opacity-10"
-          style={{ backgroundImage: "url('/gallery-hero-wedding.png')" }}
+          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1529543544282-ea669407fca3?w=1920&q=85&auto=format&fit=crop')" }}
         />
         <div className="absolute inset-0 bg-gradient-to-r from-brand-bg via-brand-bg/92 to-brand-bg" />
         {/* Gold radial glow */}

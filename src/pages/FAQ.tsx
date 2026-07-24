@@ -42,7 +42,7 @@ export default function FAQ() {
     <>
       {/* Hero */}
       <PageHeader
-        image="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=1600&q=80"
+        image="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1920&q=85&auto=format&fit=crop"
         title="HELP & FAQ"
         subtitle="Frequently Asked Questions"
         breadcrumbs={[{ label: 'FAQ' }]}

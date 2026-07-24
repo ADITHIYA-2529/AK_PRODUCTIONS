@@ -13,10 +13,10 @@ import { staggerContainer, fadeInUp, fadeInLeft, fadeInRight } from '@/animation
 
 // ─── Static fallbacks ─────────────────────────────────────────
 const FALLBACK_TEAM = [
-  { name: 'Arjun Kumar', role: 'Founder & Creative Director', image: 'https://images.pexels.com/photos/3778876/pexels-photo-3778876.jpeg?auto=compress&cs=tinysrgb&w=400', bio: '15 years of creating extraordinary events across South India.' },
-  { name: 'Priya Rajan', role: 'Lead Event Designer', image: 'https://images.pexels.com/photos/3811082/pexels-photo-3811082.jpeg?auto=compress&cs=tinysrgb&w=400', bio: 'Award-winning designer specializing in luxury wedding aesthetics.' },
-  { name: 'Vikram Nair', role: 'Head of Photography', image: 'https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=400', bio: 'Capturing emotions through a cinematic lens since 2012.' },
-  { name: 'Kavitha S.', role: 'Corporate Events Lead', image: 'https://images.pexels.com/photos/3756679/pexels-photo-3756679.jpeg?auto=compress&cs=tinysrgb&w=400', bio: 'Expert in large-scale corporate productions and brand experiences.' },
+  { name: 'Arjun Kumar', role: 'Founder & Creative Director', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80&auto=format&fit=crop', bio: '15 years of creating extraordinary events across South India.' },
+  { name: 'Priya Rajan', role: 'Lead Event Designer', image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&q=80&auto=format&fit=crop', bio: 'Award-winning designer specializing in luxury wedding aesthetics.' },
+  { name: 'Vikram Nair', role: 'Head of Photography', image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&q=80&auto=format&fit=crop', bio: 'Capturing emotions through a cinematic lens since 2012.' },
+  { name: 'Kavitha S.', role: 'Corporate Events Lead', image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=600&q=80&auto=format&fit=crop', bio: 'Expert in large-scale corporate productions and brand experiences.' },
 ]
 
 const FALLBACK_VALUES = [
@@ -91,16 +91,16 @@ export default function About() {
   // Hero image — siteSettings first, then aboutData.image, then static fallback
   const heroImage = siteSettings?.aboutHeroImage
     ? urlFor(siteSettings.aboutHeroImage).width(1400).url()
-    : (aboutData?.image ? urlFor(aboutData.image).width(1400).url() : '/about-hero-team.png')
+    : (aboutData?.image ? urlFor(aboutData.image).width(1400).url() : 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=1920&q=85&auto=format&fit=crop')
 
 
   const storyImages: string[] = aboutData?.images?.length
     ? aboutData.images.map((img: any) => urlFor(img).url())
     : [
-      '/about-story-planning.png',
-      '/about-story-decoration.png',
-      '/hero-grand-event.png',
-      '/about-hero-team.png',
+      'https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=800&q=80&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1544078751-58fee2d8a03b?w=800&q=80&auto=format&fit=crop',
     ]
 
   const missionTitle = aboutData?.missionTitle || 'To Craft Extraordinary'

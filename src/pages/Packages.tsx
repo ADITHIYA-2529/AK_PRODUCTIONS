@@ -35,7 +35,7 @@ export default function Packages() {
     <>
       {/* Hero */}
       <PageHeader
-        image="https://images.unsplash.com/photo-1478146896981-b80fe463b330?w=1600&q=80"
+        image="https://images.unsplash.com/photo-1469371670807-013ccf25f16a?w=1920&q=85&auto=format&fit=crop"
         title="OUR PACKAGES"
         subtitle="Transparent Pricing, Luxury Value"
         breadcrumbs={[{ label: 'Packages' }]}

@@ -158,7 +158,7 @@ export default function BookEvent() {
     <>
       {/* Hero */}
       <PageHeader
-        image="https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?w=1600&q=80"
+        image="https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=1920&q=85&auto=format&fit=crop"
         title="BOOK YOUR EVENT"
         subtitle="Let's Begin the Journey"
         breadcrumbs={[{ label: 'Book' }]}

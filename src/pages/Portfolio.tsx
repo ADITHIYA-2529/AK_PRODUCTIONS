@@ -5,6 +5,7 @@ import { ArrowRight, Users, MapPin, Calendar, Tag, ExternalLink } from 'lucide-r
 import SectionHeading from '@/components/shared/SectionHeading'
 import { PORTFOLIO_ITEMS, PORTFOLIO_CATEGORIES } from '@/data/portfolio'
 import { staggerContainer } from '@/animations/variants'
+import PageHeader from '@/components/shared/PageHeader'
 
 export default function Portfolio() {
   const [activeCategory, setActiveCategory] = useState('All')
@@ -18,24 +19,12 @@ export default function Portfolio() {
 
   return (
     <>
-      {/* Hero */}
-      <section className="relative h-[55vh] min-h-[380px] flex items-center overflow-hidden">
-        <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=1600&q=80" alt="Portfolio" className="absolute inset-0 w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-hero" />
-        <div className="container-luxury relative z-10 text-center">
-          <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
-            <div className="flex items-center gap-3 mb-4 justify-center">
-              <span className="gold-line" /><span className="text-gold-400 text-xs uppercase tracking-[0.3em]">Our Work</span><span className="gold-line" />
-            </div>
-            <h1 className="font-display text-5xl md:text-6xl font-bold text-white mb-4">
-              Our <span className="text-gradient-gold">Portfolio</span>
-            </h1>
-            <p className="text-white/60 text-lg max-w-2xl mx-auto font-accent italic">
-              A curated selection of our finest event productions.
-            </p>
-          </motion.div>
-        </div>
-      </section>
+      <PageHeader
+        image="https://images.unsplash.com/photo-1544078751-58fee2d8a03b?w=1920&q=85&auto=format&fit=crop"
+        title="OUR PORTFOLIO"
+        subtitle="A Curated Selection of Our Finest Event Productions"
+        breadcrumbs={[{ label: 'Portfolio' }]}
+      />
 
       {/* Featured Project Banner */}
       <section className="section">

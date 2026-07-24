@@ -77,7 +77,7 @@ export default function Events() {
     <>
       {/* HERO */}
       <PageHeader
-        image="/hero-grand-event.png"
+        image="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=1920&q=85&auto=format&fit=crop"
         title="OUR EVENTS"
         subtitle="A Showcase of Extraordinary Productions"
         breadcrumbs={[{ label: 'Events' }]}
