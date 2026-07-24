@@ -11,9 +11,9 @@ import { getContactData, getSiteSettings } from '@/sanity/queries'
 import PageHeader from '@/components/shared/PageHeader'
 
 const contactSchema = z.object({
-  name:    z.string().min(2, 'Name must be at least 2 characters'),
-  email:   z.string().email('Enter a valid email address'),
-  phone:   z.string().regex(/^[6-9]\d{9}$/, 'Enter valid 10-digit mobile number'),
+  name: z.string().min(2, 'Name must be at least 2 characters'),
+  email: z.string().email('Enter a valid email address'),
+  phone: z.string().regex(/^[6-9]\d{9}$/, 'Enter valid 10-digit mobile number'),
   subject: z.string().min(3, 'Subject required'),
   message: z.string().min(10, 'Message must be at least 10 characters'),
 })
@@ -22,14 +22,14 @@ type ContactFormData = z.infer<typeof contactSchema>
 
 // ─── Animation variants ───────────────────────────────────────
 const fadeUp = {
-  hidden:  { opacity: 0, y: 28 },
-  visible: { opacity: 1, y: 0,  transition: { duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] } },
+  hidden: { opacity: 0, y: 28 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] } },
 }
 
 export default function Contact() {
-  const [submitted,        setSubmitted]        = useState(false)
-  const [contactData,      setContactData]      = useState<any>(null)
-  const [contactHeroImage, setContactHeroImage] = useState('https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1920&q=85&auto=format&fit=crop')
+  const [submitted, setSubmitted] = useState(false)
+  const [contactData, setContactData] = useState<any>(null)
+  const [contactHeroImage, setContactHeroImage] = useState('https://res.cloudinary.com/gbarhqu6/image/upload/f_auto/q_auto/ChatGPT_Image_Jul_24_2026_03_13_26_PM_ntevxg.png')
 
   useEffect(() => {
     Promise.all([getContactData(), getSiteSettings()])
@@ -42,22 +42,22 @@ export default function Contact() {
       .catch(err => console.error('SANITY ERROR:', err))
   }, [])
 
-  const phone            = contactData?.phone            || '+91 96772 03639'
-  const whatsappNumber   = contactData?.whatsappNumber   || phone
-  const email            = contactData?.email            || 'akeventschennai@gmail.com'
-  const address          = contactData?.address          || 'Chennai, Tamil Nadu'
-  const googleMapsUrl    = contactData?.googleMapsUrl    || 'https://maps.google.com/?q=AK+Events+Chennai'
-  const workingHours     = contactData?.workingHours     || 'Mon – Sun · 9 AM – 9 PM'
-  const instagramUsername= contactData?.instagramUsername|| '@ak_events3639'
-  const instagramUrl     = contactData?.instagramUrl     || 'https://www.instagram.com/ak_events3639'
-  const facebookName     = contactData?.facebookName     || 'AK Productions'
-  const facebookUrl      = contactData?.facebookUrl      || 'https://www.facebook.com/profile.php?id=61580711224848'
+  const phone = contactData?.phone || '+91 96772 03639'
+  const whatsappNumber = contactData?.whatsappNumber || phone
+  const email = contactData?.email || 'akeventschennai@gmail.com'
+  const address = contactData?.address || 'Chennai, Tamil Nadu'
+  const googleMapsUrl = contactData?.googleMapsUrl || 'https://maps.google.com/?q=AK+Events+Chennai'
+  const workingHours = contactData?.workingHours || 'Mon – Sun · 9 AM – 9 PM'
+  const instagramUsername = contactData?.instagramUsername || '@ak_events3639'
+  const instagramUrl = contactData?.instagramUrl || 'https://www.instagram.com/ak_events3639'
+  const facebookName = contactData?.facebookName || 'AK Productions'
+  const facebookUrl = contactData?.facebookUrl || 'https://www.facebook.com/profile.php?id=61580711224848'
 
   const contactChannels = [
-    { id: 'phone',     icon: Phone,     label: 'Call Us',   value: phone,            sub: workingHours,                 href: `tel:${phone.replace(/\s+/g, '')}` },
-    { id: 'email',     icon: Mail,      label: 'Email Us',  value: email,            sub: 'We reply within 4 hours',     href: `mailto:${email}` },
-    { id: 'instagram', icon: Instagram, label: 'Instagram', value: instagramUsername, sub: 'Follow our latest work',       href: instagramUrl },
-    { id: 'facebook',  icon: Facebook,  label: 'Facebook',  value: facebookName,     sub: 'Like our page',               href: facebookUrl },
+    { id: 'phone', icon: Phone, label: 'Call Us', value: phone, sub: workingHours, href: `tel:${phone.replace(/\s+/g, '')}` },
+    { id: 'email', icon: Mail, label: 'Email Us', value: email, sub: 'We reply within 4 hours', href: `mailto:${email}` },
+    { id: 'instagram', icon: Instagram, label: 'Instagram', value: instagramUsername, sub: 'Follow our latest work', href: instagramUrl },
+    { id: 'facebook', icon: Facebook, label: 'Facebook', value: facebookName, sub: 'Like our page', href: facebookUrl },
   ]
 
   const { register, handleSubmit, formState: { errors } } = useForm<ContactFormData>({
@@ -116,7 +116,7 @@ export default function Contact() {
                 key={id}
                 href={href}
                 target={id === 'instagram' || id === 'facebook' ? '_blank' : undefined}
-                rel={id === 'instagram'   || id === 'facebook' ? 'noopener noreferrer' : undefined}
+                rel={id === 'instagram' || id === 'facebook' ? 'noopener noreferrer' : undefined}
                 variants={fadeInUp}
                 whileHover={{ y: -6 }}
                 className="contact-channel-card p-7 flex flex-col items-start gap-4 group cursor-pointer"
@@ -186,11 +186,11 @@ export default function Contact() {
               {/* Contact detail rows */}
               <div className="space-y-4 mb-8">
                 {[
-                  { id: 'phone',    icon: Phone,     label: 'Phone',     value: phone,            href: `tel:${phone.replace(/\s+/g, '')}` },
-                  { id: 'email',    icon: Mail,      label: 'Email',     value: email,            href: `mailto:${email}` },
-                  { id: 'location', icon: MapPin,    label: 'Location',  value: address,          href: googleMapsUrl },
-                  { id: 'insta',    icon: Instagram, label: 'Instagram', value: instagramUsername, href: instagramUrl },
-                  { id: 'fb',       icon: Facebook,  label: 'Facebook',  value: facebookName,     href: facebookUrl },
+                  { id: 'phone', icon: Phone, label: 'Phone', value: phone, href: `tel:${phone.replace(/\s+/g, '')}` },
+                  { id: 'email', icon: Mail, label: 'Email', value: email, href: `mailto:${email}` },
+                  { id: 'location', icon: MapPin, label: 'Location', value: address, href: googleMapsUrl },
+                  { id: 'insta', icon: Instagram, label: 'Instagram', value: instagramUsername, href: instagramUrl },
+                  { id: 'fb', icon: Facebook, label: 'Facebook', value: facebookName, href: facebookUrl },
                 ].map(({ id, icon: Icon, label, value, href }) => (
                   <a
                     key={id}

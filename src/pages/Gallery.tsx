@@ -12,12 +12,12 @@ import PageHeader from '@/components/shared/PageHeader'
 
 export default function Gallery() {
   const [activeCategory, setActiveCategory] = useState('All')
-  const [lightboxOpen,   setLightboxOpen]   = useState(false)
-  const [lightboxIndex,  setLightboxIndex]  = useState(0)
-  const [visibleCount,   setVisibleCount]   = useState(12)
-  const [galleryItems,   setGalleryItems]   = useState<GalleryItem[]>([])
-  const [loading,        setLoading]        = useState(true)
-  const [galleryHeroImage, setGalleryHeroImage] = useState('https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=1920&q=85&auto=format&fit=crop')
+  const [lightboxOpen, setLightboxOpen] = useState(false)
+  const [lightboxIndex, setLightboxIndex] = useState(0)
+  const [visibleCount, setVisibleCount] = useState(12)
+  const [galleryItems, setGalleryItems] = useState<GalleryItem[]>([])
+  const [loading, setLoading] = useState(true)
+  const [galleryHeroImage, setGalleryHeroImage] = useState('https://res.cloudinary.com/gbarhqu6/image/upload/f_auto/q_auto/ChatGPT_Image_Jul_24_2026_03_11_11_PM_eyfmoh.png')
 
   useEffect(() => {
     Promise.all([getAllGallery(), getSiteSettings()])
@@ -60,8 +60,8 @@ export default function Gallery() {
   }
 
   const categoriesToUse = ['All', ...Array.from(new Set(galleryItems.map(item => item.category))).filter(Boolean)]
-  const filtered        = activeCategory === 'All' ? galleryItems : galleryItems.filter(item => item.category === activeCategory)
-  const visible         = filtered.slice(0, visibleCount)
+  const filtered = activeCategory === 'All' ? galleryItems : galleryItems.filter(item => item.category === activeCategory)
+  const visible = filtered.slice(0, visibleCount)
 
   const openLightbox = (i: number) => {
     setLightboxIndex(i)
@@ -83,9 +83,9 @@ export default function Gallery() {
         <div className="container-luxury">
           <div className="flex flex-col sm:flex-row items-center justify-center gap-10 sm:gap-20">
             {[
-              { icon: Images,   value: `${galleryItems.length}+`, label: 'Photos in Gallery'  },
-              { icon: Camera,   value: '500+',                    label: 'Events Captured'     },
-              { icon: Sparkles, value: categoriesToUse.length - 1,label: 'Event Categories'    },
+              { icon: Images, value: `${galleryItems.length}+`, label: 'Photos in Gallery' },
+              { icon: Camera, value: '500+', label: 'Events Captured' },
+              { icon: Sparkles, value: categoriesToUse.length - 1, label: 'Event Categories' },
             ].map(({ icon: Icon, value, label }, i) => (
               <motion.div
                 key={label}
@@ -111,22 +111,20 @@ export default function Gallery() {
         <div className="container-luxury">
           <div className="flex gap-2.5 overflow-x-auto pb-1 scrollbar-hide">
             {categoriesToUse.map(cat => {
-              const count    = cat === 'All' ? galleryItems.length : galleryItems.filter(i => i.category === cat).length
+              const count = cat === 'All' ? galleryItems.length : galleryItems.filter(i => i.category === cat).length
               const isActive = activeCategory === cat
               return (
                 <button
                   key={cat}
                   onClick={() => { setActiveCategory(cat); setVisibleCount(12) }}
-                  className={`flex-shrink-0 flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-300 ${
-                    isActive
-                      ? 'bg-brand-gold text-white shadow-button'
-                      : 'bg-brand-section text-brand-body border border-brand-border hover:border-brand-gold/40 hover:text-brand-heading'
-                  }`}
+                  className={`flex-shrink-0 flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-300 ${isActive
+                    ? 'bg-brand-gold text-white shadow-button'
+                    : 'bg-brand-section text-brand-body border border-brand-border hover:border-brand-gold/40 hover:text-brand-heading'
+                    }`}
                 >
                   {cat}
-                  <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded-full ${
-                    isActive ? 'bg-white/25 text-white' : 'bg-brand-border/80 text-brand-body'
-                  }`}>
+                  <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded-full ${isActive ? 'bg-white/25 text-white' : 'bg-brand-border/80 text-brand-body'
+                    }`}>
                     {count}
                   </span>
                 </button>
@@ -160,10 +158,9 @@ export default function Gallery() {
                   <img
                     src={item.src}
                     alt={(item as any).altText || item.title || 'AK Productions Event Gallery'}
-                    className={`w-full object-cover transition-transform duration-600 group-hover:scale-108 ${
-                      item.aspectRatio === 'portrait'  ? 'aspect-[3/4]' :
+                    className={`w-full object-cover transition-transform duration-600 group-hover:scale-108 ${item.aspectRatio === 'portrait' ? 'aspect-[3/4]' :
                       item.aspectRatio === 'landscape' ? 'aspect-[4/3]' : 'aspect-square'
-                    }`}
+                      }`}
                     loading="lazy"
                   />
                   {/* Hover overlay */}

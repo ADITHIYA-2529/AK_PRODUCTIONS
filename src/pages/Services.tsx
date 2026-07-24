@@ -12,7 +12,7 @@ import { Layers, CheckCircle2, Clock } from 'lucide-react'
 
 // ─── Framer variants ──────────────────────────────────────────
 const fadeUp = {
-  hidden:  { opacity: 0, y: 28 },
+  hidden: { opacity: 0, y: 28 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] } },
 }
 
@@ -29,10 +29,10 @@ function SectionEyebrow({ children, center = false }: { children: string; center
 }
 
 export default function Services() {
-  const [activeCategory,   setActiveCategory]   = useState('All')
-  const [services,         setServices]         = useState<Service[]>([])
-  const [loading,          setLoading]          = useState(true)
-  const [servicesHeroImage,setServicesHeroImage]= useState('https://images.unsplash.com/photo-1511578314322-379afb476865?w=1920&q=85&auto=format&fit=crop')
+  const [activeCategory, setActiveCategory] = useState('All')
+  const [services, setServices] = useState<Service[]>([])
+  const [loading, setLoading] = useState(true)
+  const [servicesHeroImage, setServicesHeroImage] = useState('https://res.cloudinary.com/gbarhqu6/image/upload/f_auto/q_auto/ChatGPT_Image_Jul_24_2026_03_08_58_PM_1_kz33q5.png')
 
   useEffect(() => {
     Promise.all([getAllServices(), getSiteSettings()])
@@ -46,19 +46,19 @@ export default function Services() {
             const currentSlug = s.slug?.current || s.slug || ''
             const fallbackImg = SERVICES.find(f => f.slug === currentSlug)?.heroImage || 'https://images.unsplash.com/photo-1511578314322-379afb476865?w=1920&q=85&auto=format&fit=crop'
             return {
-              id:              s._id,
-              slug:            currentSlug,
-              name:            s.name,
-              category:        s.category,
-              tagline:         s.tagline,
-              description:     s.description,
+              id: s._id,
+              slug: currentSlug,
+              name: s.name,
+              category: s.category,
+              tagline: s.tagline,
+              description: s.description,
               longDescription: s.longDescription,
-              icon:            s.icon,
-              heroImage:       s.heroImage ? urlFor(s.heroImage).url() : fallbackImg,
-              gallery:         s.gallery?.length ? s.gallery.map((img: any) => urlFor(img).url()) : [],
-              features:        s.features || [],
-              startingPrice:   s.startingPrice || 0,
-              featured:        !!s.featured,
+              icon: s.icon,
+              heroImage: s.heroImage ? urlFor(s.heroImage).url() : fallbackImg,
+              gallery: s.gallery?.length ? s.gallery.map((img: any) => urlFor(img).url()) : [],
+              features: s.features || [],
+              startingPrice: s.startingPrice || 0,
+              featured: !!s.featured,
             }
           })
           setServices(mapped)
@@ -82,9 +82,9 @@ export default function Services() {
     )
   }
 
-  const categoriesToUse    = ['All', ...Array.from(new Set(services.map(s => s.category))).filter(Boolean)]
-  const filtered           = activeCategory === 'All' ? services : services.filter(s => s.category === activeCategory)
-  const getCategoryCount   = (cat: string) => cat === 'All' ? services.length : services.filter(s => s.category === cat).length
+  const categoriesToUse = ['All', ...Array.from(new Set(services.map(s => s.category))).filter(Boolean)]
+  const filtered = activeCategory === 'All' ? services : services.filter(s => s.category === activeCategory)
+  const getCategoryCount = (cat: string) => cat === 'All' ? services.length : services.filter(s => s.category === cat).length
 
   return (
     <>
@@ -101,22 +101,20 @@ export default function Services() {
         <div className="container-luxury">
           <div className="flex gap-2.5 overflow-x-auto pb-1 scrollbar-hide">
             {categoriesToUse.map(cat => {
-              const count    = getCategoryCount(cat)
+              const count = getCategoryCount(cat)
               const isActive = activeCategory === cat
               return (
                 <button
                   key={cat}
                   onClick={() => setActiveCategory(cat)}
-                  className={`flex-shrink-0 flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-300 ${
-                    isActive
+                  className={`flex-shrink-0 flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-300 ${isActive
                       ? 'bg-brand-gold text-white shadow-button'
                       : 'bg-brand-section text-brand-body border border-brand-border hover:border-brand-gold/40 hover:text-brand-heading'
-                  }`}
+                    }`}
                 >
                   {cat}
-                  <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded-full ${
-                    isActive ? 'bg-white/25 text-white' : 'bg-brand-border/80 text-brand-body'
-                  }`}>
+                  <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded-full ${isActive ? 'bg-white/25 text-white' : 'bg-brand-border/80 text-brand-body'
+                    }`}>
                     {count}
                   </span>
                 </button>
@@ -178,9 +176,9 @@ export default function Services() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
             {[
-              { title: 'All Under One Roof',    desc: 'No need to coordinate multiple vendors — we handle everything from décor to catering.', icon: Layers       },
-              { title: '10+ Years Experience',  desc: 'A decade of expertise delivering flawless events across all categories.',               icon: CheckCircle2 },
-              { title: 'Bespoke Customisation', desc: 'Every event is unique. We tailor our services to match your exact vision.',             icon: Clock        },
+              { title: 'All Under One Roof', desc: 'No need to coordinate multiple vendors — we handle everything from décor to catering.', icon: Layers },
+              { title: '10+ Years Experience', desc: 'A decade of expertise delivering flawless events across all categories.', icon: CheckCircle2 },
+              { title: 'Bespoke Customisation', desc: 'Every event is unique. We tailor our services to match your exact vision.', icon: Clock },
             ].map(({ title, desc, icon: Icon }, i) => (
               <motion.div
                 key={title}
