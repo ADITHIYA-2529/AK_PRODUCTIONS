@@ -44,7 +44,7 @@ export default function Services() {
         if (data && data.length > 0) {
           const mapped = data.map((s: any) => {
             const currentSlug = s.slug?.current || s.slug || ''
-            const fallbackImg = SERVICES.find(f => f.slug === currentSlug)?.heroImage || 'https://images.unsplash.com/photo-1511578314322-379afb476865?w=1920&q=85&auto=format&fit=crop'
+            const fallbackImg = SERVICES.find(f => f.slug === currentSlug)?.heroImage || 'https://res.cloudinary.com/gbarhqu6/image/upload/f_auto/q_auto/ChatGPT_Image_Jul_24_2026_03_08_58_PM_1_kz33q5.png'
             return {
               id: s._id,
               slug: currentSlug,
@@ -108,8 +108,8 @@ export default function Services() {
                   key={cat}
                   onClick={() => setActiveCategory(cat)}
                   className={`flex-shrink-0 flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-300 ${isActive
-                      ? 'bg-brand-gold text-white shadow-button'
-                      : 'bg-brand-section text-brand-body border border-brand-border hover:border-brand-gold/40 hover:text-brand-heading'
+                    ? 'bg-brand-gold text-white shadow-button'
+                    : 'bg-brand-section text-brand-body border border-brand-border hover:border-brand-gold/40 hover:text-brand-heading'
                     }`}
                 >
                   {cat}

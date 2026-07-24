@@ -79,10 +79,7 @@ export default function Navbar() {
             <div className="leading-none">
               <div className="font-display text-2xl font-bold text-brand-heading tracking-tight">
                 <span>AK</span>
-                <span className="text-brand-gold ml-1">Productions</span>
-              </div>
-              <div className="text-[9px] text-brand-body/50 tracking-[0.28em] uppercase font-body mt-0.5">
-                Premium Events · Chennai
+                <span className="text-brand-gold ml-1">PRODUCTIONS</span>
               </div>
             </div>
           </Link>

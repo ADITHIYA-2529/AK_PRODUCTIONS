@@ -24,7 +24,7 @@ export const SERVICES: Service[] = [
     description: 'Transform your wedding into a breathtaking fairy-tale with our bespoke decoration services.',
     longDescription: 'Our wedding decoration team creates immersive environments that reflect the unique love story of each couple. From ethereal floral installations to dramatic mandap designs, every element is curated with precision and artistry. We specialize in both traditional South Indian weddings and modern fusion celebrations.',
     icon: 'Heart',
-    heroImage: 'https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=1920&q=85&auto=format&fit=crop',
+    heroImage: 'https://res.cloudinary.com/gbarhqu6/image/upload/f_auto/q_auto/pexels-darshandave-30840225_eohudh.jpg',
     gallery: [
       'https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=800&q=80&auto=format&fit=crop',
       'https://images.unsplash.com/photo-1606800052052-a08af7148866?w=800&q=80&auto=format&fit=crop',
@@ -82,7 +82,7 @@ export const SERVICES: Service[] = [
     description: 'From intimate gatherings to grand milestone celebrations, we create the perfect birthday setup.',
     longDescription: 'Every birthday deserves to be extraordinary. Whether it\'s a first birthday bash or a lavish milestone celebration, our team designs stunning birthday setups with themed décor, balloon artistry, and personalised touches.',
     icon: 'Cake',
-    heroImage: 'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=1920&q=85&auto=format&fit=crop',
+    heroImage: 'https://res.cloudinary.com/gbarhqu6/image/upload/f_auto/q_auto/pexels-vlada-karpovich-7099884_guu03n.jpg',
     gallery: [
       'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=800&q=80&auto=format&fit=crop',
       'https://images.unsplash.com/photo-1531956531700-dc024130f85d?w=800&q=80&auto=format&fit=crop',
@@ -101,7 +101,7 @@ export const SERVICES: Service[] = [
     description: 'Celebrate the arrival of your little one with sweet and dreamy baby shower decorations.',
     longDescription: 'A baby shower is one of life\'s most precious moments. Our baby shower setups are soft, dreamy, and delightfully personalised — from pastel balloon installations to themed dessert tables and gender reveal moments.',
     icon: 'Baby',
-    heroImage: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=1920&q=85&auto=format&fit=crop',
+    heroImage: 'https://res.cloudinary.com/gbarhqu6/image/upload/f_auto/q_auto/jonathan-borba-CgWTqYxHEkg-unsplash_yfnotx.jpg',
     gallery: [
       'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&q=80&auto=format&fit=crop',
       'https://images.unsplash.com/photo-1516627145497-ae6968895b74?w=800&q=80&auto=format&fit=crop',
@@ -120,7 +120,7 @@ export const SERVICES: Service[] = [
     description: 'Dramatic, breathtaking stage designs that create powerful first impressions.',
     longDescription: 'The stage is the focal point of any event. Our stage decoration team creates dramatic backdrops using floral walls, fabric draping, LED installations, and custom props that command attention and create stunning photo opportunities.',
     icon: 'Sparkles',
-    heroImage: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=1920&q=85&auto=format&fit=crop',
+    heroImage: 'https://res.cloudinary.com/gbarhqu6/image/upload/f_auto/q_auto/WhatsApp_Image_2026-07-16_at_10.54.29_AM_xp7khi.jpg',
     gallery: [
       'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=800&q=80&auto=format&fit=crop',
       'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&q=80&auto=format&fit=crop',
@@ -177,7 +177,7 @@ export const SERVICES: Service[] = [
     description: 'Creative and vibrant event management for school annual days, fests, and graduation ceremonies.',
     longDescription: 'School events should be inspiring and memorable for students, parents, and faculty alike. We specialise in school annual days, sports days, graduation ceremonies, and cultural fests with colourful décor, stage setups, and event coordination.',
     icon: 'GraduationCap',
-    heroImage: 'https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=1920&q=85&auto=format&fit=crop',
+    heroImage: 'https://res.cloudinary.com/gbarhqu6/image/upload/f_auto/q_auto/pexels-suresh-photography-922908746-28389291_bcydk8.jpg',
     gallery: [
       'https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=800&q=80&auto=format&fit=crop',
       'https://images.unsplash.com/photo-1577896851231-70ef18881754?w=800&q=80&auto=format&fit=crop',
@@ -215,7 +215,7 @@ export const SERVICES: Service[] = [
     description: 'Professional photography that captures the emotion, beauty, and story of every event.',
     longDescription: 'Our photography team consists of award-winning photographers who specialise in event documentation. Using cinema-grade equipment and artistic sensibility, we capture not just moments but emotions, stories, and the authentic essence of your celebration.',
     icon: 'Camera',
-    heroImage: 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=1920&q=85&auto=format&fit=crop',
+    heroImage: 'https://res.cloudinary.com/gbarhqu6/image/upload/f_auto/q_auto/pexels-bertellifotografia-10147358_fxbs9x.jpg',
     gallery: [
       'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=800&q=80&auto=format&fit=crop',
       'https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=800&q=80&auto=format&fit=crop',
@@ -234,7 +234,7 @@ export const SERVICES: Service[] = [
     description: 'Cinematic wedding and event films that you\'ll treasure for generations.',
     longDescription: 'Our videography team creates cinematic masterpieces that preserve your most precious moments. Using 4K cameras, drones, and professional stabilisation, we craft narrative-driven films with stunning colour grading and emotional storytelling.',
     icon: 'Film',
-    heroImage: 'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=1920&q=85&auto=format&fit=crop',
+    heroImage: 'https://res.cloudinary.com/gbarhqu6/image/upload/f_auto/q_auto/pexels-gezerasph-26628634_vhljho.jpg',
     gallery: [
       'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=800&q=80&auto=format&fit=crop',
       'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=800&q=80&auto=format&fit=crop',
@@ -270,7 +270,7 @@ export const SERVICES: Service[] = [
     description: 'State-of-the-art sound systems and dramatic lighting that transform any venue.',
     longDescription: 'Professional sound and lighting can make or break an event. Our technical team uses industry-leading equipment including line arrays, intelligent moving heads, wash lights, and LED systems to create immersive audiovisual experiences.',
     icon: 'Zap',
-    heroImage: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=1920&q=85&auto=format&fit=crop',
+    heroImage: 'https://res.cloudinary.com/gbarhqu6/image/upload/f_auto/q_auto/pexels-damir-29261518_mhz6bh.jpg',
     gallery: [
       'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=800&q=80&auto=format&fit=crop',
       'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=800&q=80&auto=format&fit=crop',
@@ -288,7 +288,7 @@ export const SERVICES: Service[] = [
     description: 'Exquisite catering that delights every palate with premium cuisine and impeccable service.',
     longDescription: 'Our catering service is a culinary journey. With expert chefs specialising in South Indian, North Indian, Continental, and fusion cuisines, we create bespoke menus that delight guests and complement your event perfectly. From intimate dinners to banquet spreads.',
     icon: 'ChefHat',
-    heroImage: 'https://images.unsplash.com/photo-1555244162-803834f70033?w=1920&q=85&auto=format&fit=crop',
+    heroImage: 'https://res.cloudinary.com/gbarhqu6/image/upload/f_auto/q_auto/rawabi-i-qOca8zlCVPY-unsplash_jtec27.jpg',
     gallery: [
       'https://images.unsplash.com/photo-1555244162-803834f70033?w=800&q=80&auto=format&fit=crop',
       'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=800&q=80&auto=format&fit=crop',
@@ -306,7 +306,7 @@ export const SERVICES: Service[] = [
     description: 'Complete end-to-end event planning and coordination for a stress-free experience.',
     longDescription: 'Let us handle every detail so you can enjoy your event. Our experienced event planners coordinate vendors, manage timelines, handle logistics, and ensure flawless execution. From initial concept to final farewell, we are your dedicated event partners.',
     icon: 'ClipboardList',
-    heroImage: 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=1920&q=85&auto=format&fit=crop',
+    heroImage: 'https://res.cloudinary.com/gbarhqu6/image/upload/f_auto/q_auto/pexels-karola-g-4968711_u8wcgw.jpg',
     gallery: [
       'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&q=80&auto=format&fit=crop',
       'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80&auto=format&fit=crop',

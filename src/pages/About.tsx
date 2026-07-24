@@ -28,6 +28,33 @@ const FALLBACK_TIMELINE = [
   { year: '2025', title: '500+ Events & Growing', desc: "Now Chennai's most trusted luxury event management brand." },
 ]
 
+const FALLBACK_TEAM = [
+  {
+    name: 'Arun Kumar',
+    role: 'Founder & Creative Director',
+    image:
+      'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&q=80&auto=format&fit=crop',
+  },
+  {
+    name: 'Priya Sharma',
+    role: 'Event Manager',
+    image:
+      'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&q=80&auto=format&fit=crop',
+  },
+  {
+    name: 'Rahul Verma',
+    role: 'Production Head',
+    image:
+      'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&q=80&auto=format&fit=crop',
+  },
+  {
+    name: 'Sneha Iyer',
+    role: 'Client Relations',
+    image:
+      'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=600&q=80&auto=format&fit=crop',
+  },
+]
+
 // ─── Framer variants ──────────────────────────────────────────
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -90,10 +117,10 @@ export default function About() {
   const storyImages: string[] = aboutData?.images?.length
     ? aboutData.images.map((img: any) => urlFor(img).url())
     : [
-      'https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=800&q=80&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&q=80&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1544078751-58fee2d8a03b?w=800&q=80&auto=format&fit=crop',
+      'https://res.cloudinary.com/gbarhqu6/image/upload/f_auto/q_auto/pexels-darshandave-30840225_eohudh.jpg',
+      'https://res.cloudinary.com/gbarhqu6/image/upload/f_auto/q_auto/rawabi-i-qOca8zlCVPY-unsplash_jtec27.jpg',
+      'https://res.cloudinary.com/gbarhqu6/image/upload/f_auto/q_auto/pexels-vlada-karpovich-7099884_guu03n.jpg',
+      'https://res.cloudinary.com/gbarhqu6/image/upload/f_auto/q_auto/pexels-thevisionaryvows-33914537_azpgjt.jpg',
     ]
 
   const missionTitle = aboutData?.missionTitle || 'To Craft Extraordinary'

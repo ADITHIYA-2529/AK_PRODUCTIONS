@@ -48,8 +48,8 @@ export default function Contact() {
   const address = contactData?.address || 'Chennai, Tamil Nadu'
   const googleMapsUrl = contactData?.googleMapsUrl || 'https://maps.google.com/?q=AK+Events+Chennai'
   const workingHours = contactData?.workingHours || 'Mon – Sun · 9 AM – 9 PM'
-  const instagramUsername = contactData?.instagramUsername || '@ak_events3639'
-  const instagramUrl = contactData?.instagramUrl || 'https://www.instagram.com/ak_events3639'
+  const instagramUsername = contactData?.instagramUsername || '@ak_productions3639'
+  const instagramUrl = contactData?.instagramUrl || 'https://www.instagram.com/ak_productions3639'
   const facebookName = contactData?.facebookName || 'AK Productions'
   const facebookUrl = contactData?.facebookUrl || 'https://www.facebook.com/profile.php?id=61580711224848'
 

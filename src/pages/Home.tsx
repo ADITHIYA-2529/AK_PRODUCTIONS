@@ -116,10 +116,10 @@ export default function Home() {
   const aboutImages: string[] = about?.images?.length
     ? about.images.map((img: any) => urlFor(img).url())
     : [
-      'https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=1200&q=85&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=1200&q=85&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&q=85&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1544078751-58fee2d8a03b?w=1200&q=85&auto=format&fit=crop',
+      'https://res.cloudinary.com/gbarhqu6/image/upload/f_auto/q_auto/pexels-thevisionaryvows-33914537_azpgjt.jpg',
+      'https://res.cloudinary.com/gbarhqu6/image/upload/f_auto/q_auto/pexels-darshandave-30840225_eohudh.jpg',
+      'https://res.cloudinary.com/gbarhqu6/image/upload/f_auto/q_auto/pexels-brunounreal-15117022_jwhxkw.jpg',
+      'https://res.cloudinary.com/gbarhqu6/image/upload/f_auto/q_auto/vidit-goswami-a6Kee4s4aPw-unsplash_l2hpky.jpg',
     ]
 
   const phone = contact?.phone || '+91 96772 03639'
