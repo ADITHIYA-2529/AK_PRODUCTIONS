@@ -27,10 +27,9 @@ export const SERVICES: Service[] = [
     heroImage: 'https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=1920&q=85&auto=format&fit=crop',
     gallery: [
       'https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=800&q=80&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1606800052052-a08af7148866?w=800&q=80&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1545232979-fbfd42e000b5?w=800&q=80&auto=format&fit=crop',
       'https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800&q=80&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1544078751-58fee2d8a03b?w=800&q=80&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1469371670807-013ccf25f16a?w=800&q=80&auto=format&fit=crop',
     ],
     features: ['Floral Mandap Design', 'Stage & Backdrop', 'Table Centrepieces', 'Aisle Décor', 'Entry Arch', 'Fairy Light Canopy', 'Floral Photo Wall', 'Bridal Suite Setup'],
     startingPrice: 75000,
@@ -49,8 +48,7 @@ export const SERVICES: Service[] = [
     gallery: [
       'https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=800&q=80&auto=format&fit=crop',
       'https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?w=800&q=80&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=800&q=80&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=800&q=80&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1532712938310-34cb3982ef74?w=800&q=80&auto=format&fit=crop',
     ],
     features: ['Floral Ring Setup', 'Photo Backdrop', 'Table Settings', 'Balloon Décor', 'Champagne Setup', 'Mood Lighting'],
     startingPrice: 35000,
@@ -69,7 +67,6 @@ export const SERVICES: Service[] = [
     gallery: [
       'https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800&q=80&auto=format&fit=crop',
       'https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=800&q=80&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=800&q=80&auto=format&fit=crop',
       'https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?w=800&q=80&auto=format&fit=crop',
     ],
     features: ['Grand Stage Setup', 'Welcome Entry Arch', 'Round Table Décor', 'Candle Lighting', 'Dance Floor Design', 'Buffet Styling'],
@@ -88,8 +85,8 @@ export const SERVICES: Service[] = [
     heroImage: 'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=1920&q=85&auto=format&fit=crop',
     gallery: [
       'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=800&q=80&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1531956531700-dc024130f85d?w=800&q=80&auto=format&fit=crop',
       'https://images.unsplash.com/photo-1513151233558-d860c5398176?w=800&q=80&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=800&q=80&auto=format&fit=crop',
     ],
     features: ['Theme Decoration', 'Balloon Arches', 'Photo Booth', 'Cake Table Setup', 'LED Signage', 'Confetti Shower'],
     startingPrice: 15000,
@@ -104,11 +101,11 @@ export const SERVICES: Service[] = [
     description: 'Celebrate the arrival of your little one with sweet and dreamy baby shower decorations.',
     longDescription: 'A baby shower is one of life\'s most precious moments. Our baby shower setups are soft, dreamy, and delightfully personalised — from pastel balloon installations to themed dessert tables and gender reveal moments.',
     icon: 'Baby',
-    heroImage: 'https://images.unsplash.com/photo-1513151233558-d860c5398176?w=1920&q=85&auto=format&fit=crop',
+    heroImage: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=1920&q=85&auto=format&fit=crop',
     gallery: [
-      'https://images.unsplash.com/photo-1513151233558-d860c5398176?w=800&q=80&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=800&q=80&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=800&q=80&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&q=80&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1516627145497-ae6968895b74?w=800&q=80&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=800&q=80&auto=format&fit=crop',
     ],
     features: ['Theme Setup', 'Balloon Garlands', 'Dessert Table', 'Photo Backdrop', 'Gift Table', 'Floral Arrangements'],
     startingPrice: 20000,
@@ -126,8 +123,8 @@ export const SERVICES: Service[] = [
     heroImage: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=1920&q=85&auto=format&fit=crop',
     gallery: [
       'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=800&q=80&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&q=80&auto=format&fit=crop',
       'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&q=80&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=800&q=80&auto=format&fit=crop',
     ],
     features: ['Floral Backdrop', 'Fabric Draping', 'LED Wall', 'Custom Signage', 'Prop Design', 'Lighting Design'],
     startingPrice: 25000,
@@ -145,8 +142,8 @@ export const SERVICES: Service[] = [
     heroImage: 'https://images.unsplash.com/photo-1511578314322-379afb476865?w=1920&q=85&auto=format&fit=crop',
     gallery: [
       'https://images.unsplash.com/photo-1511578314322-379afb476865?w=800&q=80&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80&auto=format&fit=crop',
       'https://images.unsplash.com/photo-1505236858219-8359eb29e329?w=800&q=80&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=800&q=80&auto=format&fit=crop',
     ],
     features: ['Custom Theme Design', 'Full Venue Transformation', 'Prop Creation', 'Themed Costumes', 'Entry Experience', 'Themed Catering Setup'],
     startingPrice: 45000,
@@ -183,7 +180,8 @@ export const SERVICES: Service[] = [
     heroImage: 'https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=1920&q=85&auto=format&fit=crop',
     gallery: [
       'https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=800&q=80&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1511578314322-379afb476865?w=800&q=80&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1577896851231-70ef18881754?w=800&q=80&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1509062522246-3755977927d7?w=800&q=80&auto=format&fit=crop',
     ],
     features: ['Stage Setup', 'Welcome Arch', 'Seating Arrangement', 'Backdrop Design', 'Certificate Podium', 'Cultural Décor'],
     startingPrice: 30000,
@@ -202,6 +200,7 @@ export const SERVICES: Service[] = [
     gallery: [
       'https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=800&q=80&auto=format&fit=crop',
       'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=800&q=80&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=800&q=80&auto=format&fit=crop',
     ],
     features: ['Fest Stage', 'DJ & Sound', 'Sponsor Banners', 'Photo Ops', 'Farewell Setup', 'Convocation Stage'],
     startingPrice: 40000,
@@ -220,7 +219,7 @@ export const SERVICES: Service[] = [
     gallery: [
       'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=800&q=80&auto=format&fit=crop',
       'https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=800&q=80&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1606800052052-a08af7148866?w=800&q=80&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1452587925148-ce544e77e70d?w=800&q=80&auto=format&fit=crop',
     ],
     features: ['Candid Photography', 'Portrait Sessions', 'Drone Shots', 'Photo Albums', 'Same-Day Edit', 'Cloud Gallery'],
     startingPrice: 25000,
@@ -238,8 +237,7 @@ export const SERVICES: Service[] = [
     heroImage: 'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=1920&q=85&auto=format&fit=crop',
     gallery: [
       'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=800&q=80&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=800&q=80&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&q=80&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=800&q=80&auto=format&fit=crop',
     ],
     features: ['4K Cinematic Film', 'Drone Coverage', 'Highlights Reel', 'Live Streaming', 'Same-Day Edit', 'Digital Delivery'],
     startingPrice: 35000,
@@ -254,11 +252,10 @@ export const SERVICES: Service[] = [
     description: 'Professional DJ services that set the perfect mood for every moment of your event.',
     longDescription: 'Our resident DJs are experienced in all genres — from Bollywood to EDM, classical to contemporary. With professional sound equipment and lighting rigs, we ensure the dance floor stays packed and the atmosphere electric throughout your event.',
     icon: 'Music',
-    heroImage: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=1920&q=85&auto=format&fit=crop',
+    heroImage: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=1920&q=85&auto=format&fit=crop',
     gallery: [
-      'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=800&q=80&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&q=80&auto=format&fit=crop',
       'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=800&q=80&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&q=80&auto=format&fit=crop',
     ],
     features: ['Professional DJ', 'Premium Sound', 'LED Dance Floor', 'Fog Machine', 'LED Uplighting', 'Custom Playlist'],
     startingPrice: 20000,
@@ -277,7 +274,6 @@ export const SERVICES: Service[] = [
     gallery: [
       'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=800&q=80&auto=format&fit=crop',
       'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=800&q=80&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&q=80&auto=format&fit=crop',
     ],
     features: ['PA Line Array', 'Moving Head Lights', 'LED Wash', 'Gobo Projection', 'Truss Structure', 'Stage Monitors'],
     startingPrice: 30000,
@@ -296,7 +292,6 @@ export const SERVICES: Service[] = [
     gallery: [
       'https://images.unsplash.com/photo-1555244162-803834f70033?w=800&q=80&auto=format&fit=crop',
       'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=800&q=80&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1469371670807-013ccf25f16a?w=800&q=80&auto=format&fit=crop',
     ],
     features: ['South & North Indian Menus', 'Live Cooking Stations', 'Buffet & Plated Service', 'Mocktail Bar', 'Custom Dessert Counter', 'Food Styling'],
     startingPrice: 50000,
@@ -315,8 +310,6 @@ export const SERVICES: Service[] = [
     gallery: [
       'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&q=80&auto=format&fit=crop',
       'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80&auto=format&fit=crop',
     ],
     features: ['Dedicated Planner', 'Vendor Coordination', 'Timeline Management', 'Budget Planning', 'Day-of Coordination', 'Post-Event Report'],
     startingPrice: 50000,

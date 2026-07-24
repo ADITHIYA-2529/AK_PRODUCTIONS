@@ -29,7 +29,7 @@ const fadeUp = {
 export default function Contact() {
   const [submitted,        setSubmitted]        = useState(false)
   const [contactData,      setContactData]      = useState<any>(null)
-  const [contactHeroImage, setContactHeroImage] = useState('https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1920&q=85&auto=format&fit=crop')
+  const [contactHeroImage, setContactHeroImage] = useState('https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1920&q=85&auto=format&fit=crop')
 
   useEffect(() => {
     Promise.all([getContactData(), getSiteSettings()])

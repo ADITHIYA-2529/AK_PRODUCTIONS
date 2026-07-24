@@ -13,15 +13,21 @@
    ============================================================ */
 :root {
   /* Backgrounds */
-  --bg: #FCFBF8;
-  --section-bg: #F7F3EC;
+  --bg: #FCFAF7;
+  --section-bg: #F5F2EB;
   --white: #FFFFFF;
 
   /* Brand Colors */
   --gold: #C8A24A;
+  --gold-dark: #A67C00;
   --gold-light: #E6C97A;
   --gold-dim: rgba(200, 162, 74, 0.10);
   --gold-border: rgba(200, 162, 74, 0.22);
+
+  /* Accents */
+  --burgundy: #7A1F2A;
+  --forest-green: #2F5D50;
+  --navy: #1E3A5F;
 
   /* Text */
   --heading: #2B2B2B;
