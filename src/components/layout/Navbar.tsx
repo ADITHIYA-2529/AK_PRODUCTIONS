@@ -72,14 +72,14 @@ export default function Navbar() {
               <img
                 src={navLogoSrc}
                 alt="AK Productions"
-                className="w-14 h-14 rounded-full object-cover shadow-float-sm border border-brand-border/60"
+                className="w-16 h-16 md:w-[70px] md:h-[70px] rounded-full object-cover shadow-float-sm border border-brand-border/60"
                 loading="lazy"
               />
             </div>
             <div className="leading-none">
-              <div className="font-display text-2xl font-bold text-brand-heading tracking-tight">
+              <div className="font-display text-2xl md:text-3xl font-bold text-brand-heading tracking-tight">
                 <span>AK</span>
-                <span className="text-brand-gold ml-1">PRODUCTIONS</span>
+                <span className="text-brand-gold ml-1.5">PRODUCTIONS</span>
               </div>
             </div>
           </Link>
