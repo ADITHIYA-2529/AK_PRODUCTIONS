@@ -3,10 +3,11 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { motion } from 'framer-motion'
-import { Phone, Mail, Send, Check, Instagram, Facebook, MapPin } from 'lucide-react'
+import { Phone, Mail, Send, Check, Instagram, Facebook, MapPin, Loader2, AlertCircle } from 'lucide-react'
 import { staggerContainer, fadeInUp, fadeInLeft, fadeInRight } from '@/animations/variants'
 import { urlFor } from '@/sanity/image'
 import { getContactData, getSiteSettings } from '@/sanity/queries'
+import { sendContactEmail } from '@/services/emailService'
 
 import PageHeader from '@/components/shared/PageHeader'
 
@@ -28,6 +29,8 @@ const fadeUp = {
 
 export default function Contact() {
   const [submitted, setSubmitted] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [errorMessage, setErrorMessage] = useState<string | null>(null)
   const [contactData, setContactData] = useState<any>(null)
   const [contactHeroImage, setContactHeroImage] = useState('https://res.cloudinary.com/gbarhqu6/image/upload/f_auto/q_auto/ChatGPT_Image_Jul_24_2026_03_13_26_PM_ntevxg.png')
 
@@ -64,9 +67,18 @@ export default function Contact() {
     resolver: zodResolver(contactSchema),
   })
 
-  const onSubmit = (data: ContactFormData) => {
-    console.log(data)
-    setSubmitted(true)
+  const onSubmit = async (data: ContactFormData) => {
+    setIsSubmitting(true)
+    setErrorMessage(null)
+
+    const res = await sendContactEmail(data)
+    setIsSubmitting(false)
+
+    if (res.success) {
+      setSubmitted(true)
+    } else {
+      setErrorMessage(res.message || 'Failed to send your message. Please try again or reach out via WhatsApp.')
+    }
   }
 
   const inputClass = "w-full bg-white border border-brand-border rounded-2xl px-4 py-3.5 text-brand-heading text-sm font-body placeholder:text-brand-body/35 focus:outline-none focus:border-brand-gold focus:shadow-[0_0_0_3px_rgba(200,162,74,0.12)] transition-all duration-300"
@@ -246,6 +258,20 @@ export default function Contact() {
                     <p className="text-brand-body text-sm font-body">We'll respond within 4 business hours.</p>
                   </div>
 
+                  {errorMessage && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -6 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="p-4 bg-red-50 border border-red-200 rounded-2xl text-red-700 text-xs font-body flex items-start gap-3"
+                    >
+                      <AlertCircle size={16} className="text-red-500 flex-shrink-0 mt-0.5" />
+                      <div>
+                        <div className="font-semibold mb-0.5">Submission Error</div>
+                        <div>{errorMessage}</div>
+                      </div>
+                    </motion.div>
+                  )}
+
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div>
                       <label className="block text-[10px] text-brand-body font-display font-bold uppercase tracking-widest mb-2">
@@ -312,11 +338,20 @@ export default function Contact() {
 
                   <motion.button
                     type="submit"
-                    whileHover={{ y: -2 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="btn-gold w-full justify-center font-bold py-4 text-sm"
+                    disabled={isSubmitting}
+                    whileHover={{ y: isSubmitting ? 0 : -2 }}
+                    whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
+                    className="btn-gold w-full justify-center font-bold py-4 text-sm disabled:opacity-70 disabled:cursor-not-allowed"
                   >
-                    <Send size={15} /> Send Message
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 size={16} className="animate-spin" /> Sending Message...
+                      </>
+                    ) : (
+                      <>
+                        <Send size={15} /> Send Message
+                      </>
+                    )}
                   </motion.button>
                 </form>
               )}

@@ -1,17 +1,64 @@
-import { useState } from 'react'
-import { useForm } from 'react-hook-form'
+import React, { useState } from 'react'
+import { useForm, FieldError } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import {
   User, Phone, Mail, Calendar, Users, MapPin, Wallet,
-  FileText, Check, ChevronRight, ChevronLeft, Sparkles, ArrowRight
+  FileText, Check, ChevronRight, ChevronLeft, Sparkles, ArrowRight, Loader2, AlertCircle
 } from 'lucide-react'
 import { SERVICES } from '@/constants/services'
-import { formatCurrency } from '@/utils/formatters'
+import { formatCurrency, formatDate } from '@/utils/formatters'
+import { sendBookingEmail } from '@/services/emailService'
 
 import PageHeader from '@/components/shared/PageHeader'
+
+/* ============================================
+   INPUT FIELD COMPONENT (Top Level)
+   ============================================ */
+interface InputFieldProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  id: string
+  label: string
+  icon: React.ElementType
+  error?: FieldError
+}
+
+const InputField = React.forwardRef<HTMLInputElement, InputFieldProps>(
+  ({ id, label, icon: Icon, type = 'text', placeholder, error, min, onClick, ...rest }, ref) => (
+    <div>
+      <label htmlFor={id} className="block text-xs text-brand-body font-semibold uppercase tracking-widest mb-2 font-medium">
+        {label}
+      </label>
+      <div className="relative">
+        <Icon size={14} className="absolute left-4 top-1/2 -translate-y-1/2 text-brand-body/40 pointer-events-none z-10" />
+        <input
+          ref={ref}
+          id={id}
+          type={type}
+          min={min}
+          placeholder={placeholder}
+          onClick={(e) => {
+            if (type === 'date' && 'showPicker' in e.currentTarget) {
+              try {
+                (e.currentTarget as HTMLInputElement).showPicker()
+              } catch {
+                // browser restricts showPicker without explicit user action
+              }
+            }
+            onClick?.(e)
+          }}
+          {...rest}
+          className={`w-full bg-white border rounded-xl pl-10 pr-4 py-3.5 text-brand-heading text-sm placeholder:text-brand-body/45 focus:outline-none focus:border-brand-gold focus:ring-1 focus:ring-brand-gold transition-all ${
+            type === 'date' ? 'cursor-pointer' : ''
+          } ${error ? 'border-red-500 focus:ring-red-500' : 'border-brand-border'}`}
+        />
+      </div>
+      {error && <p className="text-red-500 text-xs mt-1.5">{error.message}</p>}
+    </div>
+  )
+)
+InputField.displayName = 'InputField'
 
 /* ============================================
    ZOD SCHEMA
@@ -19,8 +66,16 @@ import PageHeader from '@/components/shared/PageHeader'
 const bookingSchema = z.object({
   // Step 1 - Event Details
   eventType: z.string().min(1, 'Please select an event type'),
-  eventDate: z.string().min(1, 'Please select an event date'),
-  guests: z.coerce.number().min(10, 'Minimum 10 guests').max(5000, 'Maximum 5000 guests'),
+  eventDate: z.string()
+    .min(1, 'Please select an event date')
+    .refine((val) => {
+      if (!val) return false
+      const selected = new Date(val + 'T00:00:00')
+      const today = new Date()
+      today.setHours(0, 0, 0, 0)
+      return selected >= today
+    }, 'Event date cannot be in the past'),
+  guests: z.coerce.number({ invalid_type_error: 'Please enter number of guests' }).min(10, 'Minimum 10 guests').max(5000, 'Maximum 5000 guests'),
   venue: z.string().min(3, 'Please enter the venue name or location'),
 
   // Step 2 - Personal Info
@@ -50,9 +105,19 @@ const STEPS = [
   { title: 'Budget & More', icon: Wallet },
 ]
 
+function formatDisplayDate(dateStr?: string): string {
+  if (!dateStr) return ''
+  const d = new Date(dateStr + 'T00:00:00')
+  return isNaN(d.getTime()) ? dateStr : formatDate(d)
+}
+
 export default function BookEvent() {
   const [step, setStep] = useState(1)
   const [submitted, setSubmitted] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [errorMessage, setErrorMessage] = useState<string | null>(null)
+
+  const todayDateString = new Date().toISOString().split('T')[0]
 
   const {
     register,
@@ -75,31 +140,18 @@ export default function BookEvent() {
     if (valid) setStep(s => s + 1)
   }
 
-  const onSubmit = (data: BookingFormData) => {
-    console.log('Booking data:', data)
-    setSubmitted(true)
-  }
+  const onSubmit = async (data: BookingFormData) => {
+    setIsSubmitting(true)
+    setErrorMessage(null)
+    const res = await sendBookingEmail(data)
+    setIsSubmitting(false)
 
-  const InputField = ({
-    id, label, icon: Icon, type = 'text', placeholder, error, ...rest
-  }: any) => (
-    <div>
-      <label htmlFor={id} className="block text-xs text-brand-body font-semibold uppercase tracking-widest mb-2">{label}</label>
-      <div className="relative">
-        <Icon size={14} className="absolute left-4 top-1/2 -translate-y-1/2 text-brand-body/40" />
-        <input
-          id={id}
-          type={type}
-          placeholder={placeholder}
-          {...rest}
-          className={`w-full bg-white border rounded-xl pl-10 pr-4 py-3.5 text-brand-heading text-sm placeholder:text-brand-body/45 focus:outline-none focus:border-brand-gold focus:ring-1 focus:ring-brand-gold transition-all ${
-            error ? 'border-red-500 focus:ring-red-500' : 'border-brand-border'
-          }`}
-        />
-      </div>
-      {error && <p className="text-red-500 text-xs mt-1.5">{error.message}</p>}
-    </div>
-  )
+    if (res.success) {
+      setSubmitted(true)
+    } else {
+      setErrorMessage(res.message || 'Failed to submit booking. Please try again.')
+    }
+  }
 
   if (submitted) {
     return (
@@ -134,7 +186,7 @@ export default function BookEvent() {
             </div>
             <div className="flex justify-between text-sm">
               <span className="text-brand-body text-xs uppercase tracking-wider font-semibold">Date</span>
-              <span className="text-brand-heading font-medium">{watchedValues.eventDate}</span>
+              <span className="text-brand-heading font-medium">{formatDisplayDate(watchedValues.eventDate)}</span>
             </div>
             <div className="flex justify-between text-sm">
               <span className="text-brand-body text-xs uppercase tracking-wider font-semibold">Guests</span>
@@ -177,11 +229,10 @@ export default function BookEvent() {
                 return (
                   <div key={title} className="flex items-center">
                     <div className={`flex flex-col items-center gap-2 ${isActive ? 'opacity-100' : isDone ? 'opacity-80' : 'opacity-40'}`}>
-                      <div className={`w-12 h-12 rounded-full flex items-center justify-center border-2 transition-all duration-300 ${
-                        isDone ? 'bg-brand-gold border-brand-gold text-white shadow-sm' :
-                        isActive ? 'border-brand-gold text-brand-gold bg-brand-gold/10' :
-                        'border-brand-border text-brand-body/40 bg-brand-section'
-                      }`}>
+                      <div className={`w-12 h-12 rounded-full flex items-center justify-center border-2 transition-all duration-300 ${isDone ? 'bg-brand-gold border-brand-gold text-white shadow-sm' :
+                          isActive ? 'border-brand-gold text-brand-gold bg-brand-gold/10' :
+                            'border-brand-border text-brand-body/40 bg-brand-section'
+                        }`}>
                         {isDone ? <Check size={18} /> : <Icon size={18} />}
                       </div>
                       <span className={`text-[10px] font-bold uppercase tracking-wider hidden sm:block ${isActive ? 'text-brand-gold font-semibold' : 'text-brand-body/50'}`}>
@@ -222,11 +273,10 @@ export default function BookEvent() {
                             {SERVICES.slice(0, 12).map(s => (
                               <label
                                 key={s.id}
-                                className={`flex items-center gap-2 p-3 rounded-xl border cursor-pointer transition-all text-sm ${
-                                  watchedValues.eventType === s.name
+                                className={`flex items-center gap-2 p-3 rounded-xl border cursor-pointer transition-all text-sm ${watchedValues.eventType === s.name
                                     ? 'border-brand-gold bg-brand-gold/10 text-brand-gold font-semibold'
                                     : 'border-brand-border text-brand-body hover:border-brand-gold bg-brand-bg'
-                                }`}
+                                  }`}
                               >
                                 <input
                                   type="radio"
@@ -250,6 +300,7 @@ export default function BookEvent() {
                             label="Event Date *"
                             icon={Calendar}
                             type="date"
+                            min={todayDateString}
                             error={errors.eventDate}
                             {...register('eventDate')}
                           />
@@ -339,11 +390,10 @@ export default function BookEvent() {
                             {BUDGET_RANGES.map(range => (
                               <label
                                 key={range}
-                                className={`flex items-center gap-3 p-3.5 rounded-xl border cursor-pointer transition-all text-sm ${
-                                  watchedValues.budget === range
+                                className={`flex items-center gap-3 p-3.5 rounded-xl border cursor-pointer transition-all text-sm ${watchedValues.budget === range
                                     ? 'border-brand-gold bg-brand-gold/10 text-brand-gold font-semibold'
                                     : 'border-brand-border text-brand-body hover:border-brand-gold bg-brand-bg'
-                                }`}
+                                  }`}
                               >
                                 <input type="radio" value={range} {...register('budget')} className="hidden" />
                                 <span className="w-4 h-4 rounded-full border flex-shrink-0 flex items-center justify-center border-brand-border text-brand-gold">
@@ -368,9 +418,8 @@ export default function BookEvent() {
                               rows={5}
                               placeholder="Describe your dream event — theme, style, special requests, inspirations..."
                               {...register('requirements')}
-                              className={`w-full bg-white border border-brand-border rounded-xl pl-10 pr-4 py-3.5 text-brand-heading text-sm placeholder:text-brand-body/45 focus:outline-none focus:border-brand-gold focus:ring-1 focus:ring-brand-gold transition-all resize-none ${
-                                errors.requirements ? 'border-red-500 focus:ring-red-500' : 'border-brand-border'
-                              }`}
+                              className={`w-full bg-white border border-brand-border rounded-xl pl-10 pr-4 py-3.5 text-brand-heading text-sm placeholder:text-brand-body/45 focus:outline-none focus:border-brand-gold focus:ring-1 focus:ring-brand-gold transition-all resize-none ${errors.requirements ? 'border-red-500 focus:ring-red-500' : 'border-brand-border'
+                                }`}
                             />
                           </div>
                           {errors.requirements && <p className="text-red-500 text-xs mt-1.5">{errors.requirements.message}</p>}
@@ -379,13 +428,28 @@ export default function BookEvent() {
                     )}
                   </AnimatePresence>
 
+                  {errorMessage && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -6 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="mt-6 p-4 bg-red-50 border border-red-200 rounded-2xl text-red-700 text-xs font-body flex items-start gap-3"
+                    >
+                      <AlertCircle size={16} className="text-red-500 flex-shrink-0 mt-0.5" />
+                      <div>
+                        <div className="font-semibold mb-0.5">Booking Submission Error</div>
+                        <div>{errorMessage}</div>
+                      </div>
+                    </motion.div>
+                  )}
+
                   {/* Navigation Buttons */}
                   <div className="flex justify-between mt-6">
                     {step > 1 ? (
                       <button
                         type="button"
+                        disabled={isSubmitting}
                         onClick={() => setStep(s => s - 1)}
-                        className="btn-outline-gold py-3"
+                        className="btn-outline-gold py-3 disabled:opacity-50"
                       >
                         <ChevronLeft size={14} /> Previous
                       </button>
@@ -400,8 +464,20 @@ export default function BookEvent() {
                         Next Step <ChevronRight size={14} />
                       </button>
                     ) : (
-                      <button type="submit" className="btn-gold py-3">
-                        <Sparkles size={14} /> Submit Booking
+                      <button
+                        type="submit"
+                        disabled={isSubmitting}
+                        className="btn-gold py-3 disabled:opacity-70 disabled:cursor-not-allowed"
+                      >
+                        {isSubmitting ? (
+                          <>
+                            <Loader2 size={14} className="animate-spin" /> Submitting Booking...
+                          </>
+                        ) : (
+                          <>
+                            <Sparkles size={14} /> Submit Booking
+                          </>
+                        )}
                       </button>
                     )}
                   </div>
@@ -415,7 +491,7 @@ export default function BookEvent() {
                   <div className="space-y-4 text-sm">
                     {[
                       { label: 'Event Type', value: watchedValues.eventType },
-                      { label: 'Date', value: watchedValues.eventDate },
+                      { label: 'Date', value: formatDisplayDate(watchedValues.eventDate) },
                       { label: 'Guests', value: watchedValues.guests ? `${watchedValues.guests} guests` : undefined },
                       { label: 'Venue', value: watchedValues.venue },
                       { label: 'Name', value: watchedValues.name },
