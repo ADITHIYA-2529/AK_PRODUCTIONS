@@ -77,7 +77,7 @@ export default function Events() {
     <>
       {/* HERO */}
       <PageHeader
-        image="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=1920&q=85&auto=format&fit=crop"
+        image="https://res.cloudinary.com/gbarhqu6/image/upload/f_auto/q_auto/ChatGPT_Image_Jul_25_2026_06_04_14_PM_h7qhy6.png"
         title="OUR EVENTS"
         subtitle="A Showcase of Extraordinary Productions"
         breadcrumbs={[{ label: 'Events' }]}
