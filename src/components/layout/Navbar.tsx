@@ -172,12 +172,6 @@ export default function Navbar() {
                 </NavLink>
               ))}
 
-              <div className="pt-8">
-                <Link to="/contact" className="btn-gold w-full justify-center font-bold py-4">
-                  Book Consultation
-                </Link>
-              </div>
-
               {/* Brand badge */}
               <div className="mt-auto pt-8 flex items-center gap-2 text-brand-body/40">
                 <Gem size={12} className="text-brand-gold/50" />

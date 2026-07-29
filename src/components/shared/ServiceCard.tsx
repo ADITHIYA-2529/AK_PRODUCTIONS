@@ -21,10 +21,10 @@ export default function ServiceCard({ service, index = 0 }: ServiceCardProps) {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.55, delay: index * 0.07, ease: [0.25, 0.46, 0.45, 0.94] }}
       whileHover={{ y: -8 }}
-      className="group relative bg-white rounded-4xl border border-brand-border overflow-hidden shadow-card hover:shadow-card-hover hover:border-brand-gold/30 transition-all duration-400"
+      className="group relative bg-white rounded-4xl border border-brand-border overflow-hidden shadow-card hover:shadow-card-hover hover:border-brand-gold/30 transition-all duration-400 flex flex-col h-full"
     >
       {/* ── Image ── */}
-      <div className="relative aspect-[4/3] overflow-hidden">
+      <div className="relative aspect-[4/3] overflow-hidden flex-shrink-0">
         <img
           src={service.heroImage}
           alt={service.name}
@@ -64,7 +64,7 @@ export default function ServiceCard({ service, index = 0 }: ServiceCardProps) {
       </div>
 
       {/* ── Content ── */}
-      <div className="p-6">
+      <div className="p-6 flex flex-col flex-1">
         <h3 className="font-display text-lg text-brand-heading font-bold mb-1.5 group-hover:text-brand-gold transition-colors duration-300">
           {service.name}
         </h3>
@@ -74,7 +74,7 @@ export default function ServiceCard({ service, index = 0 }: ServiceCardProps) {
 
         {/* Feature tags */}
         {service.features?.length > 0 && (
-          <div className="flex flex-wrap gap-1.5 mb-5">
+          <div className="flex flex-wrap gap-1.5 mb-5 mt-auto">
             {service.features.slice(0, 3).map(feat => (
               <span
                 key={feat}
@@ -93,7 +93,7 @@ export default function ServiceCard({ service, index = 0 }: ServiceCardProps) {
 
         <Link
           to={`/services/${service.slug}`}
-          className="inline-flex items-center gap-1.5 text-brand-gold hover:text-brand-brown text-[11px] font-semibold uppercase tracking-wider transition-colors group/link"
+          className="inline-flex items-center gap-1.5 text-brand-gold hover:text-brand-brown text-[11px] font-semibold uppercase tracking-wider transition-colors group/link mt-auto pt-2"
         >
           Explore Service
           <ArrowRight size={13} className="group-hover/link:translate-x-1 transition-transform" />
