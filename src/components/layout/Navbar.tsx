@@ -17,14 +17,13 @@ const NAV_LINKS = [
   { label: 'Contact', path: '/contact' },
 ]
 
-// ── Mobile drawer nav links (includes Admin) ──
+// ── Mobile drawer nav links ──
 const MOBILE_NAV_LINKS = [
   { label: 'Home', path: '/' },
   { label: 'About', path: '/about' },
   { label: 'Services', path: '/services' },
   { label: 'Gallery', path: '/gallery' },
   { label: 'Contact', path: '/contact' },
-  { label: 'Admin', path: '/admin' },
 ]
 
 export default function Navbar() {
