@@ -10,6 +10,7 @@ import About from '@/pages/About'
 import Services from '@/pages/Services'
 import ServiceDetail from '@/pages/ServiceDetail'
 import Events from '@/pages/Events'
+import EventDetail from '@/pages/EventDetail'
 import Gallery from '@/pages/Gallery'
 import Contact from '@/pages/Contact'
 
@@ -17,6 +18,7 @@ import Contact from '@/pages/Contact'
 import BookEvent from '@/pages/BookEvent'
 import FAQ from '@/pages/FAQ'
 import Packages from '@/pages/Packages'
+import Admin from '@/pages/Admin'
 
 // 404 Not Found
 function NotFound() {
@@ -47,6 +49,7 @@ export default function App() {
                 <Route path="/services/:slug" element={<ServiceDetail />} />
                 <Route path="/gallery" element={<Gallery />} />
                 <Route path="/events" element={<Events />} />
+                <Route path="/events/:slug" element={<EventDetail />} />
                 <Route path="/contact" element={<Contact />} />
 
                 {/* Legacy redirect: /portfolio → /events */}
@@ -56,6 +59,7 @@ export default function App() {
                 <Route path="/book-event" element={<BookEvent />} />
                 <Route path="/packages" element={<Packages />} />
                 <Route path="/faq" element={<FAQ />} />
+                <Route path="/admin" element={<Admin />} />
 
                 {/* 404 */}
                 <Route path="*" element={<NotFound />} />

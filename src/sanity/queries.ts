@@ -17,9 +17,33 @@ export const HOME_GALLERY_QUERY = `*[_type == "gallery"] | order(displayOrder as
 
 export const ALL_GALLERY_QUERY = `*[_type == "gallery"] | order(displayOrder asc, date desc, _createdAt desc)`;
 
-export const HOME_EVENTS_QUERY = `*[_type == "event"] | order(date desc)[0...3]`;
+export const HOME_EVENTS_QUERY = `*[_type == "event"] | order(date desc)[0...3] {
+  _id, title, subtitle, category, coverImage, bannerImage, images,
+  guests, venue, date, time, organizer, registrationDeadline,
+  description, tags, status, featured,
+  "slug": slug.current
+}`;
 
-export const ALL_EVENTS_QUERY = `*[_type == "event"] | order(date desc)`;
+export const ALL_EVENTS_QUERY = `*[_type == "event"] | order(date desc) {
+  _id, title, subtitle, category, coverImage, bannerImage, images,
+  guests, venue, date, time, organizer, registrationDeadline,
+  description, tags, status, featured,
+  "slug": slug.current
+}`;
+
+export const EVENT_BY_SLUG_QUERY = `*[_type == "event" && slug.current == $slug][0] {
+  _id, title, subtitle, category, coverImage, bannerImage, images,
+  guests, venue, date, time, organizer, registrationDeadline,
+  description, tags, status, featured,
+  "slug": slug.current
+}`;
+
+export const EVENT_BY_ID_QUERY = `*[_type == "event" && _id == $id][0] {
+  _id, title, subtitle, category, coverImage, bannerImage, images,
+  guests, venue, date, time, organizer, registrationDeadline,
+  description, tags, status, featured,
+  "slug": slug.current
+}`;
 
 export const FAQS_QUERY = `*[_type == "faq"] | order(order asc)`;
 
@@ -70,6 +94,14 @@ export async function getAllEvents() {
   return await client.fetch(ALL_EVENTS_QUERY);
 }
 
+export async function getEventBySlug(slug: string) {
+  return await client.fetch(EVENT_BY_SLUG_QUERY, { slug });
+}
+
+export async function getEventById(id: string) {
+  return await client.fetch(EVENT_BY_ID_QUERY, { id });
+}
+
 export async function getAllFaqs() {
   return await client.fetch(FAQS_QUERY);
 }
@@ -92,3 +124,4 @@ export const SITE_SETTINGS_QUERY = `*[_type == "siteSettings"][0]`
 export async function getSiteSettings() {
   return await client.fetch(SITE_SETTINGS_QUERY)
 }
+

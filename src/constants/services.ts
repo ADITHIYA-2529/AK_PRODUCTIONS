@@ -17,8 +17,8 @@ export interface Service {
 export const SERVICES: Service[] = [
   {
     id: '1',
-    slug: 'wedding-decoration',
-    name: 'Wedding Decoration',
+    slug: 'wedding-ceremony',
+    name: 'Wedding Ceremony',
     category: 'Wedding',
     tagline: 'Where Forever Begins',
     description: 'Transform your wedding into a breathtaking fairy-tale with our bespoke decoration services.',
@@ -26,10 +26,9 @@ export const SERVICES: Service[] = [
     icon: 'Heart',
     heroImage: 'https://res.cloudinary.com/gbarhqu6/image/upload/f_auto/q_auto/pexels-darshandave-30840225_eohudh.jpg',
     gallery: [
-      'https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=800&q=80&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1606800052052-a08af7148866?w=800&q=80&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1545232979-fbfd42e000b5?w=800&q=80&auto=format&fit=crop',
       'https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=800&q=80&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&q=80&auto=format&fit=crop',
     ],
     features: ['Floral Mandap Design', 'Stage & Backdrop', 'Table Centrepieces', 'Aisle Décor', 'Entry Arch', 'Fairy Light Canopy', 'Floral Photo Wall', 'Bridal Suite Setup'],
     startingPrice: 75000,
@@ -294,7 +293,7 @@ export const SERVICES: Service[] = [
       'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=800&q=80&auto=format&fit=crop',
     ],
     features: ['South & North Indian Menus', 'Live Cooking Stations', 'Buffet & Plated Service', 'Mocktail Bar', 'Custom Dessert Counter', 'Food Styling'],
-    startingPrice: 50000,
+    startingPrice: 250,
     featured: false,
   },
   {

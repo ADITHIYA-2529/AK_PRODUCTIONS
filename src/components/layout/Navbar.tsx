@@ -8,13 +8,23 @@ import { urlFor } from '@/sanity/image'
 
 const logoImg = "/AK PRODUCTIONS LOGO.png";
 
-// ── Five primary nav links (Admin removed) ──
+// ── Primary nav links for desktop ──
 const NAV_LINKS = [
   { label: 'Home', path: '/' },
   { label: 'About', path: '/about' },
   { label: 'Services', path: '/services' },
   { label: 'Gallery', path: '/gallery' },
   { label: 'Contact', path: '/contact' },
+]
+
+// ── Mobile drawer nav links (includes Admin) ──
+const MOBILE_NAV_LINKS = [
+  { label: 'Home', path: '/' },
+  { label: 'About', path: '/about' },
+  { label: 'Services', path: '/services' },
+  { label: 'Gallery', path: '/gallery' },
+  { label: 'Contact', path: '/contact' },
+  { label: 'Admin', path: '/admin' },
 ]
 
 export default function Navbar() {
@@ -145,13 +155,13 @@ export default function Navbar() {
             <div className="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-brand-gold to-transparent" />
 
             <div className="container-luxury flex flex-col gap-1 flex-1">
-              {NAV_LINKS.map(({ label, path }) => (
+              {MOBILE_NAV_LINKS.map(({ label, path }) => (
                 <NavLink
                   key={path}
                   to={path}
                   end={path === '/'}
                   className={({ isActive: a }) => cn(
-                    'flex items-center justify-between py-5 border-b border-brand-border/60 text-base font-body font-semibold uppercase tracking-widest transition-colors duration-200',
+                    'flex items-center justify-between py-4 sm:py-5 border-b border-brand-border/60 text-base font-body font-semibold uppercase tracking-widest transition-colors duration-200',
                     a ? 'text-brand-gold' : 'text-brand-heading/80 hover:text-brand-gold'
                   )}
                 >

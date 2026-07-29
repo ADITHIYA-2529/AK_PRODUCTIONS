@@ -8,8 +8,8 @@ import {
 } from '@/sanity/queries'
 import {
   ArrowRight, Building2, Heart, Cake, Camera, Sparkles, Film,
-  MapPin, Calendar, Trophy, HeartHandshake, Award, Users, Gem, Phone, Mail,
-  CheckCircle2, Star, Zap, Shield
+  MapPin, Calendar, Award, Gem, Phone, Mail,
+  CheckCircle2, Star, Zap, Shield, Trophy
 } from 'lucide-react'
 import { GALLERY_ITEMS } from '@/constants/gallery'
 import { PORTFOLIO_ITEMS } from '@/data/portfolio'
@@ -104,9 +104,8 @@ export default function Home() {
   const heroButtonText = home?.heroButtonText || 'Explore Events'
 
   const eventsCount = home?.eventsCount || '500+'
-  const clientsCount = home?.clientsCount || '1500+'
   const yearsCount = home?.yearsCount || '10+'
-  const teamCount = home?.teamCount || '25+'
+  const clientsCount = home?.clientsCount || '1500+'
 
   const aboutPara1 = home?.aboutPreviewText || about?.description?.split('\n\n')?.[0]
     || 'AK Productions is a premium, full-service event management studio founded in Chennai in 2015. We transform every client\'s vision into a breathtaking, flawlessly executed reality — delivering luxury experiences that exceed expectations.'
@@ -125,13 +124,6 @@ export default function Home() {
   const phone = contact?.phone || '+91 96772 03639'
   const email = contact?.email || 'akeventschennai@gmail.com'
   const whatsappUrl = `https://wa.me/${phone.replace(/[^0-9]/g, '')}`
-
-  const STATS = [
-    { icon: Trophy, value: eventsCount, label: 'Events Completed' },
-    { icon: HeartHandshake, value: clientsCount, label: 'Happy Clients' },
-    { icon: Award, value: yearsCount, label: 'Years Experience' },
-    { icon: Users, value: teamCount, label: 'Professional Team' },
-  ]
 
   const previewServices = featuredServices.length
     ? featuredServices.map((s: any) => ({
@@ -248,7 +240,12 @@ export default function Home() {
                 transition={{ duration: 0.9, delay: 0.45 }}
                 className="grid grid-cols-2 sm:grid-cols-4 gap-5"
               >
-                {STATS.map(({ value, label }) => (
+                {[
+                  { value: eventsCount, label: 'Events Completed' },
+                  { value: clientsCount, label: 'Happy Clients' },
+                  { value: yearsCount, label: 'Years Experience' },
+                  { value: '25+', label: 'Professional Team' },
+                ].map(({ value, label }) => (
                   <div key={label} className="text-center sm:text-left">
                     <div className="font-display text-2xl font-bold text-gradient-gold">{value}</div>
                     <div className="text-brand-body/60 text-[11px] uppercase tracking-wider font-body mt-0.5">{label}</div>
@@ -268,8 +265,8 @@ export default function Home() {
               <div className="relative w-full max-w-[520px]">
 
                 {/* Gold circle accent (large) */}
-                <div className="absolute -right-8 -top-8 w-64 h-64 rounded-full border border-brand-gold/18 bg-brand-gold/3 animate-float-slow" />
-                <div className="absolute -left-4 -bottom-6 w-40 h-40 rounded-full border border-brand-gold/12 bg-brand-gold/2" />
+                <div className="absolute right-0 sm:-right-8 top-0 sm:-top-8 w-64 h-64 rounded-full border border-brand-gold/18 bg-brand-gold/3 animate-float-slow pointer-events-none" />
+                <div className="absolute left-0 sm:-left-4 bottom-0 sm:-bottom-6 w-40 h-40 rounded-full border border-brand-gold/12 bg-brand-gold/2 pointer-events-none" />
 
                 {/* Image */}
                 <div className="hero-image-frame animate-float relative z-10">
@@ -287,14 +284,14 @@ export default function Home() {
                   initial={{ opacity: 0, x: -20, y: 10 }}
                   animate={{ opacity: 1, x: 0, y: 0 }}
                   transition={{ duration: 0.7, delay: 0.8 }}
-                  className="floating-badge absolute -left-8 top-16 z-20 px-4 py-3 flex items-center gap-2.5"
+                  className="floating-badge absolute left-2 sm:-left-8 top-16 z-20 px-3.5 sm:px-4 py-2.5 sm:py-3 flex items-center gap-2 sm:gap-2.5"
                 >
-                  <div className="w-8 h-8 rounded-full bg-brand-gold flex items-center justify-center flex-shrink-0">
+                  <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-brand-gold flex items-center justify-center flex-shrink-0">
                     <Award size={14} className="text-white" />
                   </div>
                   <div>
-                    <div className="font-display text-lg font-bold text-brand-heading leading-none">{yearsCount}</div>
-                    <div className="text-[10px] text-brand-body/60 font-body">Years Excellence</div>
+                    <div className="font-display text-base sm:text-lg font-bold text-brand-heading leading-none">{yearsCount}</div>
+                    <div className="text-[9px] sm:text-[10px] text-brand-body/60 font-body">Years Excellence</div>
                   </div>
                 </motion.div>
 
@@ -303,14 +300,14 @@ export default function Home() {
                   initial={{ opacity: 0, x: 20, y: 10 }}
                   animate={{ opacity: 1, x: 0, y: 0 }}
                   transition={{ duration: 0.7, delay: 1.0 }}
-                  className="floating-badge absolute -right-6 bottom-24 z-20 px-4 py-3 flex items-center gap-2.5"
+                  className="floating-badge absolute right-2 sm:-right-6 bottom-16 sm:bottom-24 z-20 px-3.5 sm:px-4 py-2.5 sm:py-3 flex items-center gap-2 sm:gap-2.5"
                 >
-                  <div className="w-8 h-8 rounded-full bg-brand-gold flex items-center justify-center flex-shrink-0">
+                  <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-brand-gold flex items-center justify-center flex-shrink-0">
                     <Trophy size={14} className="text-white" />
                   </div>
                   <div>
-                    <div className="font-display text-lg font-bold text-brand-heading leading-none">{eventsCount}</div>
-                    <div className="text-[10px] text-brand-body/60 font-body">Events Crafted</div>
+                    <div className="font-display text-base sm:text-lg font-bold text-brand-heading leading-none">{eventsCount}</div>
+                    <div className="text-[9px] sm:text-[10px] text-brand-body/60 font-body">Events Crafted</div>
                   </div>
                 </motion.div>
 
@@ -319,16 +316,16 @@ export default function Home() {
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.7, delay: 1.2 }}
-                  className="floating-badge absolute right-4 -top-6 z-20 px-4 py-2.5 flex items-center gap-2"
+                  className="floating-badge absolute right-2 sm:right-4 top-2 sm:-top-6 z-20 px-3 sm:px-4 py-2 sm:py-2.5 flex items-center gap-2"
                 >
                   <div className="flex -space-x-1.5">
                     {[0, 1, 2].map(i => (
-                      <div key={i} className="w-6 h-6 rounded-full bg-brand-gold/20 border-2 border-white flex items-center justify-center">
+                      <div key={i} className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-brand-gold/20 border-2 border-white flex items-center justify-center">
                         <Star size={8} className="text-brand-gold" />
                       </div>
                     ))}
                   </div>
-                  <span className="text-[11px] font-display font-semibold text-brand-heading">{clientsCount} Clients</span>
+                  <span className="text-[10px] sm:text-[11px] font-display font-semibold text-brand-heading">{clientsCount} Clients</span>
                 </motion.div>
               </div>
             </motion.div>
@@ -435,9 +432,9 @@ export default function Home() {
                 ))}
               </div>
               {/* Years badge */}
-              <div className="absolute -bottom-5 -right-4 bg-white rounded-3xl px-5 py-4 text-center border border-brand-border shadow-float">
-                <div className="font-display text-3xl font-bold text-gradient-gold">{yearsCount}</div>
-                <div className="text-brand-body/65 text-[11px] font-body mt-0.5">Years of Excellence</div>
+              <div className="absolute bottom-2 sm:-bottom-5 right-2 sm:-right-4 bg-white rounded-3xl px-4 sm:px-5 py-3 sm:py-4 text-center border border-brand-border shadow-float">
+                <div className="font-display text-2xl sm:text-3xl font-bold text-gradient-gold">{yearsCount}</div>
+                <div className="text-brand-body/65 text-[10px] sm:text-[11px] font-body mt-0.5">Years of Excellence</div>
               </div>
             </motion.div>
 
@@ -610,7 +607,7 @@ export default function Home() {
                     )}
                   </div>
                   <Link
-                    to="/events"
+                    to={`/events/${(item as any).slug || item.id}`}
                     className="btn-outline-gold w-full text-center justify-center py-2.5 text-[11px] font-bold mt-auto"
                   >
                     View Details
@@ -661,36 +658,6 @@ export default function Home() {
               </motion.div>
             ))}
           </motion.div>
-        </div>
-      </section>
-
-      {/* ══════════════════════════════════════════
-          8 · STATS
-          ══════════════════════════════════════════ */}
-      <section className="section bg-brand-section border-y border-brand-border">
-        <div className="container-luxury">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-            {STATS.map(({ icon: Icon, value, label }, i) => (
-              <motion.div
-                key={label}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: i * 0.1 }}
-                className="text-center"
-              >
-                <div className="w-14 h-14 mx-auto mb-4 rounded-2xl bg-brand-gold/12 border border-brand-gold/22 flex items-center justify-center text-brand-gold">
-                  <Icon size={24} />
-                </div>
-                <div className="font-display text-4xl md:text-5xl font-extrabold text-gradient-gold mb-2">
-                  {value}
-                </div>
-                <div className="text-brand-body/65 text-[11px] font-body font-semibold uppercase tracking-wider">
-                  {label}
-                </div>
-              </motion.div>
-            ))}
-          </div>
         </div>
       </section>
 

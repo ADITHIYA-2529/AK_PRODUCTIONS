@@ -20,6 +20,16 @@ export default defineType({
     }),
 
     defineField({
+      name: 'slug',
+      title: 'Slug (URL)',
+      type: 'slug',
+      options: {
+        source: 'title',
+        maxLength: 96,
+      },
+    }),
+
+    defineField({
       name: 'category',
       title: 'Category',
       type: 'string',
@@ -47,6 +57,14 @@ export default defineType({
     }),
 
     defineField({
+      name: 'bannerImage',
+      title: 'Banner Image (for Event Detail hero)',
+      type: 'image',
+      options: { hotspot: true },
+      description: 'Optional large banner image for the event detail page. Falls back to Cover Image if not set.',
+    }),
+
+    defineField({
       name: 'images',
       title: 'Gallery Images',
       type: 'array',
@@ -66,6 +84,30 @@ export default defineType({
     }),
 
     defineField({
+      name: 'date',
+      title: 'Event Date',
+      type: 'date',
+    }),
+
+    defineField({
+      name: 'time',
+      title: 'Event Time (e.g. 6:00 PM IST)',
+      type: 'string',
+    }),
+
+    defineField({
+      name: 'organizer',
+      title: 'Organizer / Host',
+      type: 'string',
+    }),
+
+    defineField({
+      name: 'registrationDeadline',
+      title: 'Registration Deadline (optional)',
+      type: 'date',
+    }),
+
+    defineField({
       name: 'description',
       title: 'Description',
       type: 'text',
@@ -77,12 +119,6 @@ export default defineType({
       title: 'Tags (e.g. Luxury, Floral, Traditional)',
       type: 'array',
       of: [{ type: 'string' }],
-    }),
-
-    defineField({
-      name: 'date',
-      title: 'Event Date',
-      type: 'date',
     }),
 
     defineField({

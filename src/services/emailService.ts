@@ -20,6 +20,20 @@ export interface BookingEmailParams {
   requirements: string
 }
 
+export interface RegistrationEmailParams {
+  fullName: string
+  email: string
+  phone: string
+  college: string
+  participants: number | string
+  message?: string
+  // Event metadata for future backend integration
+  eventId: string
+  eventName: string
+  eventDate: string
+  eventTitle: string
+}
+
 function getEmailJSConfig() {
   return {
     serviceId: import.meta.env.VITE_EMAILJS_SERVICE_ID || '',
@@ -168,6 +182,73 @@ export async function sendBookingEmail(params: BookingEmailParams): Promise<{ su
     return {
       success: false,
       message: error?.text || error?.message || 'Failed to send booking details via EmailJS',
+    }
+  }
+}
+
+/**
+ * Sends event registration email via EmailJS.
+ * Reuses the booking template with registration-specific field mapping.
+ * Includes event metadata for future backend integration.
+ */
+export async function sendRegistrationEmail(params: RegistrationEmailParams): Promise<{ success: boolean; message?: string }> {
+  const { serviceId, contactTemplateId, bookingTemplateId, publicKey } = getEmailJSConfig()
+
+  const templateParams = {
+    // Standard aliases for the booking template
+    from_name: params.fullName,
+    name: params.fullName,
+    reply_to: params.email,
+    user_email: params.email,
+    email: params.email,
+    user_phone: params.phone,
+    phone: params.phone,
+    // Map event registration fields to booking template variables
+    event_type: params.eventName,
+    eventType: params.eventName,
+    event_date: params.eventDate,
+    eventDate: params.eventDate,
+    guests_count: String(params.participants),
+    guests: String(params.participants),
+    venue_location: params.college,
+    venue: params.college,
+    budget_range: `${params.participants} participant(s)`,
+    budget: `${params.participants} participant(s)`,
+    requirements: params.message || 'No additional message provided.',
+    message: params.message || 'No additional message provided.',
+    // Registration-specific fields
+    college_organization: params.college,
+    participants_count: String(params.participants),
+    event_id: params.eventId,
+    event_title: params.eventTitle,
+    submitted_at: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
+  }
+
+  const targetTemplateId = (bookingTemplateId && bookingTemplateId !== 'your_booking_template_id')
+    ? bookingTemplateId
+    : contactTemplateId
+
+  if (!isEmailJSConfigured()) {
+    await new Promise((resolve) => setTimeout(resolve, 1000))
+    return { success: true, message: 'Simulated registration send success' }
+  }
+
+  const templateCheck = validateTemplateId(targetTemplateId, serviceId)
+  if (!templateCheck.valid) {
+    return { success: false, message: templateCheck.error }
+  }
+
+  try {
+    const response = await emailjs.send(serviceId, targetTemplateId, templateParams, { publicKey })
+    if (response.status === 200 || response.text === 'OK') {
+      return { success: true }
+    }
+    return { success: false, message: `EmailJS response status: ${response.status}` }
+  } catch (error: any) {
+    console.error('[EmailJS Registration Error]', error)
+    return {
+      success: false,
+      message: error?.text || error?.message || 'Failed to send registration. Please try again.',
     }
   }
 }

@@ -82,9 +82,14 @@ export default function Services() {
     )
   }
 
-  const categoriesToUse = ['All', ...Array.from(new Set(services.map(s => s.category))).filter(Boolean)]
-  const filtered = activeCategory === 'All' ? services : services.filter(s => s.category === activeCategory)
-  const getCategoryCount = (cat: string) => cat === 'All' ? services.length : services.filter(s => s.category === cat).length
+  // Filter out any EMI/Loan/Finance service from appearing as a standalone card
+  const validServices = services.filter(s =>
+    !/emi|loan|finance/i.test(s.name) && !/emi|loan|finance/i.test(s.slug || '')
+  )
+
+  const categoriesToUse = ['All', ...Array.from(new Set(validServices.map(s => s.category))).filter(Boolean)]
+  const filtered = activeCategory === 'All' ? validServices : validServices.filter(s => s.category === activeCategory)
+  const getCategoryCount = (cat: string) => cat === 'All' ? validServices.length : validServices.filter(s => s.category === cat).length
 
   return (
     <>

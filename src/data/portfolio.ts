@@ -12,7 +12,12 @@ export interface PortfolioItem {
   date: string
   status?: string
   featured?: boolean
+  slug?: string
+  time?: string
+  organizer?: string
+  registrationDeadline?: string
 }
+
 
 export const PORTFOLIO_ITEMS: PortfolioItem[] = [
   {
@@ -43,7 +48,7 @@ export const PORTFOLIO_ITEMS: PortfolioItem[] = [
     category: 'World Record Event',
     coverImage: 'https://res.cloudinary.com/gbarhqu6/image/upload/f_auto/q_auto/ChatGPT_Image_Jul_25_2026_12_55_26_PM_g2dpqj.png',
     images: [
-      'https://res.cloudinary.com/gbarhqu6/image/upload/f_auto/q_auto/WhatsApp_Image_2026-07-15_at_2.46.40_PM_1_ekpbu7.jp',
+      'https://res.cloudinary.com/gbarhqu6/image/upload/f_auto/q_auto/WhatsApp_Image_2026-07-15_at_2.46.40_PM_1_ekpbu7.jpg',
     ],
     guests: 500,
     venue: 'Chennai, Tamil Nadu',

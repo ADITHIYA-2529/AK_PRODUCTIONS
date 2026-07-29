@@ -38,7 +38,7 @@ export default function PageHeader({
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 1] }}
       className={cn(
-        'relative h-[460px] md:h-[500px] w-full flex items-center justify-center overflow-hidden rounded-b-[40px] md:rounded-b-[56px] shadow-float-lg bg-brand-bg',
+        'relative h-[380px] sm:h-[460px] md:h-[500px] w-full flex items-center justify-center overflow-hidden rounded-b-[32px] sm:rounded-b-[40px] md:rounded-b-[56px] shadow-float-lg bg-brand-bg',
         className
       )}
     >
@@ -56,13 +56,13 @@ export default function PageHeader({
       </div>
 
       {/* Content Container */}
-      <div className="container-luxury relative z-20 text-center flex flex-col items-center justify-center pt-12">
+      <div className="container-luxury relative z-20 text-center flex flex-col items-center justify-center pt-10 sm:pt-12">
         {/* Breadcrumb Navigation */}
         <motion.nav
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3, ease: 'easeOut' }}
-          className="flex items-center gap-2 mb-4 font-body text-xs font-semibold uppercase tracking-widest"
+          className="flex items-center gap-2 mb-4 font-body text-xs font-semibold uppercase tracking-widest flex-wrap justify-center"
         >
           <Link to="/" className="text-white/70 hover:text-brand-gold-secondary transition-colors">
             Home
@@ -92,7 +92,7 @@ export default function PageHeader({
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
           style={{ textShadow: '0 5px 25px rgba(0,0,0,0.35)' }}
-          className="font-display text-4xl md:text-[60px] font-extrabold uppercase tracking-wide leading-tight mb-4 select-none bg-gradient-to-r from-[#F8E8B0] via-[#E6C97A] via-[#C8A24A] to-[#9B6A18] bg-clip-text text-transparent"
+          className="font-display text-2xl sm:text-4xl md:text-[60px] font-extrabold uppercase tracking-wide leading-tight mb-3 sm:mb-4 select-none bg-gradient-to-r from-[#F8E8B0] via-[#E6C97A] via-[#C8A24A] to-[#9B6A18] bg-clip-text text-transparent"
         >
           {title}
         </motion.h1>

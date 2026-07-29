@@ -26,7 +26,7 @@ export default function FloatingButtons() {
   const whatsappUrl = `https://wa.me/${phone}?text=Hello%20AK%20Productions!%20I%20would%20like%20to%20enquire%20about%20your%20services.`
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3.5">
+    <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 flex flex-col items-end gap-2.5 sm:gap-3.5">
       {/* Scroll to top */}
       <AnimatePresence>
         {showScrollTop && (

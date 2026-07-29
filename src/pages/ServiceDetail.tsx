@@ -9,6 +9,7 @@ import GalleryLightbox from '@/components/shared/GalleryLightbox'
 import { formatCurrency } from '@/utils/formatters'
 import { urlFor } from '@/sanity/image'
 import { getServiceBySlug as fetchServiceBySanity } from '@/sanity/queries'
+import EMISection from '@/components/common/EMISection'
 
 export default function ServiceDetail() {
   const { slug } = useParams<{ slug: string }>()
@@ -197,6 +198,21 @@ export default function ServiceDetail() {
                       {service.slug === 'catering' ? `${formatCurrency(service.startingPrice)}/pax` : formatCurrency(service.startingPrice)}
                     </span>
                   </div>
+
+                  {/* EMI Availability Indicators */}
+                  <div className="pt-2 pb-1 space-y-1.5 bg-brand-gold/5 p-3 rounded-xl border border-brand-gold/20">
+                    <div className="text-xs font-bold text-brand-heading flex items-center gap-1.5 font-body">
+                      <span>✅</span>
+                      <span>EMI Available</span>
+                    </div>
+                    <div className="text-[11px] text-brand-body font-body font-medium pl-5">
+                      Flexible Monthly Installments
+                    </div>
+                    <div className="text-[10px] text-brand-gold font-body font-semibold uppercase tracking-wider pl-5">
+                      Contact Us for EMI Eligibility
+                    </div>
+                  </div>
+
                   <div className="h-px bg-brand-border" />
                 </div>
                 <Link to="/book-event" className="btn-gold w-full text-center justify-center mb-3">
@@ -279,6 +295,9 @@ export default function ServiceDetail() {
           </div>
         </div>
       </section>
+
+      {/* Reusable EMI Section */}
+      <EMISection />
 
       {/* FAQ */}
       <section className="section bg-brand-section">

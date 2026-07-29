@@ -143,7 +143,7 @@ export default function Gallery() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4"
+              className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4"
             >
               {visible.map((item, i) => (
                 <motion.div

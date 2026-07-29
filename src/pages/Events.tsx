@@ -25,6 +25,7 @@ export default function Events() {
         if (data && data.length > 0) {
           const mapped: PortfolioItem[] = data.map((e: any) => ({
             id: e._id,
+            slug: e.slug || e._id,
             title: e.title,
             subtitle: e.subtitle || '',
             category: e.category || 'Other',
@@ -35,20 +36,23 @@ export default function Events() {
             description: e.description || '',
             tags: e.tags || [],
             date: e.date || '',
+            time: e.time || '',
+            organizer: e.organizer || '',
+            registrationDeadline: e.registrationDeadline || '',
             status: e.status || 'past',
             featured: !!e.featured,
           }))
           setAllEvents(mapped)
         } else {
           // fallback: treat static data as "past", first 2 as "upcoming"
-          const fallback = PORTFOLIO_ITEMS.map((p, i) => ({ ...p, status: i < 2 ? 'upcoming' : 'past', featured: i === 0 }))
+          const fallback = PORTFOLIO_ITEMS.map((p, i) => ({ ...p, slug: p.slug || p.id, status: i < 2 ? 'upcoming' : 'past', featured: i === 0 }))
           setAllEvents(fallback as any)
         }
         setLoading(false)
       })
       .catch((err) => {
         console.error('SANITY ERROR:', err)
-        const fallback = PORTFOLIO_ITEMS.map((p, i) => ({ ...p, status: i < 2 ? 'upcoming' : 'past', featured: i === 0 }))
+        const fallback = PORTFOLIO_ITEMS.map((p, i) => ({ ...p, slug: p.slug || p.id, status: i < 2 ? 'upcoming' : 'past', featured: i === 0 }))
         setAllEvents(fallback as any)
         setLoading(false)
       })
@@ -161,8 +165,8 @@ export default function Events() {
                       {event.guests > 0 && <span className="flex items-center gap-1.5"><Users size={12} className="text-brand-gold" /> {event.guests} Guests</span>}
                     </div>
 
-                    <Link to="/contact" className="btn-gold font-bold text-xs">
-                      Reserve Your Spot <ArrowRight size={13} />
+                    <Link to={`/events/${event.slug || event.id}`} className="btn-gold font-bold text-xs">
+                      View Details & Register <ArrowRight size={13} />
                     </Link>
                   </div>
                 </motion.article>

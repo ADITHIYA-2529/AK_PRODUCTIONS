@@ -229,18 +229,18 @@ export default function BookEvent() {
                 return (
                   <div key={title} className="flex items-center">
                     <div className={`flex flex-col items-center gap-2 ${isActive ? 'opacity-100' : isDone ? 'opacity-80' : 'opacity-40'}`}>
-                      <div className={`w-12 h-12 rounded-full flex items-center justify-center border-2 transition-all duration-300 ${isDone ? 'bg-brand-gold border-brand-gold text-white shadow-sm' :
+                      <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center border-2 transition-all duration-300 ${isDone ? 'bg-brand-gold border-brand-gold text-white shadow-sm' :
                           isActive ? 'border-brand-gold text-brand-gold bg-brand-gold/10' :
                             'border-brand-border text-brand-body/40 bg-brand-section'
                         }`}>
-                        {isDone ? <Check size={18} /> : <Icon size={18} />}
+                        {isDone ? <Check size={16} /> : <Icon size={16} />}
                       </div>
                       <span className={`text-[10px] font-bold uppercase tracking-wider hidden sm:block ${isActive ? 'text-brand-gold font-semibold' : 'text-brand-body/50'}`}>
                         {title}
                       </span>
                     </div>
                     {i < STEPS.length - 1 && (
-                      <div className={`w-16 md:w-24 h-px mx-2 transition-colors duration-300 ${step > num ? 'bg-brand-gold' : 'bg-brand-border'}`} />
+                      <div className={`w-6 sm:w-16 md:w-24 h-px mx-1 sm:mx-2 transition-colors duration-300 ${step > num ? 'bg-brand-gold' : 'bg-brand-border'}`} />
                     )}
                   </div>
                 )

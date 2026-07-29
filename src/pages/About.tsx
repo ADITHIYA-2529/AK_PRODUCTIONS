@@ -189,9 +189,9 @@ export default function About() {
                   </div>
                 ))}
               </div>
-              <div className="absolute -bottom-6 -right-6 bg-white rounded-3xl p-5 text-center border border-brand-border shadow-float">
-                <div className="font-display text-3xl font-bold text-gradient-gold">{yearsCount}+</div>
-                <div className="text-brand-body text-xs mt-1">Years of Excellence</div>
+              <div className="absolute bottom-2 sm:-bottom-6 right-2 sm:-right-6 bg-white rounded-3xl p-4 sm:p-5 text-center border border-brand-border shadow-float">
+                <div className="font-display text-2xl sm:text-3xl font-bold text-gradient-gold">{yearsCount}+</div>
+                <div className="text-brand-body text-[10px] sm:text-xs mt-1">Years of Excellence</div>
               </div>
             </motion.div>
           </div>
@@ -297,7 +297,7 @@ export default function About() {
           <SectionHeading pretitle="Our Journey" title="A Decade of" highlight="Excellence" />
           <div className="relative max-w-3xl mx-auto">
             {/* Vertical gold line */}
-            <div className="absolute left-6 top-0 bottom-0 w-px bg-gradient-to-b from-brand-gold via-brand-gold-secondary to-transparent" />
+            <div className="absolute left-5 sm:left-6 top-0 bottom-0 w-px bg-gradient-to-b from-brand-gold via-brand-gold-secondary to-transparent" />
             {timeline.map((item: any, i: number) => (
               <motion.div
                 key={item.year}
@@ -305,15 +305,15 @@ export default function About() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="relative pl-16 pb-10 last:pb-0"
+                className="relative pl-14 sm:pl-16 pb-8 sm:pb-10 last:pb-0"
               >
                 {/* Year bubble */}
-                <div className="absolute left-0 w-12 h-12 rounded-full bg-white border-2 border-brand-gold/40 shadow-card flex items-center justify-center text-brand-gold text-xs font-bold">
+                <div className="absolute left-0 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white border-2 border-brand-gold/40 shadow-card flex items-center justify-center text-brand-gold text-[11px] sm:text-xs font-bold">
                   {item.year.slice(2)}
                 </div>
                 <div className="text-brand-gold text-xs uppercase tracking-widest mb-1">{item.year}</div>
-                <h3 className="font-display text-lg text-brand-heading font-semibold mb-1">{item.title}</h3>
-                <p className="text-brand-body text-sm font-light leading-relaxed">{item.desc}</p>
+                <h3 className="font-display text-base sm:text-lg text-brand-heading font-semibold mb-1">{item.title}</h3>
+                <p className="text-brand-body text-xs sm:text-sm font-light leading-relaxed">{item.desc}</p>
               </motion.div>
             ))}
           </div>
