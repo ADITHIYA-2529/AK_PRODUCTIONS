@@ -64,13 +64,13 @@ export default function Footer() {
 
       {/* ── Pre-footer CTA ── */}
       <div className="relative border-b border-white/8">
-        <div className="container-luxury py-14 sm:py-16 md:py-20 flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left">
+        <div className="container-luxury px-5 sm:px-6 py-16 sm:py-20 md:py-24 flex flex-col md:flex-row items-center justify-between gap-10 md:gap-8 text-center md:text-left">
           <div className="max-w-2xl">
-            <h3 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-white leading-tight mb-3">
+            <h3 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-white leading-tight mb-4">
               Ready to create something{' '}
               <span className="text-brand-gold">extraordinary?</span>
             </h3>
-            <p className="text-white/60 text-sm sm:text-base font-body font-light leading-relaxed">
+            <p className="text-white/60 text-sm sm:text-base font-body font-light leading-7 mb-2">
               Let's turn your vision into a breathtaking reality.
             </p>
           </div>
@@ -89,12 +89,12 @@ export default function Footer() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: '-80px' }}
-        className="container-luxury py-16 sm:py-20 md:py-24 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 sm:gap-12 lg:gap-14 xl:gap-16"
+        className="container-luxury px-5 sm:px-6 py-14 sm:py-20 md:py-24 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 sm:gap-12 lg:gap-14 xl:gap-16"
       >
 
         {/* Brand */}
         <motion.div variants={fadeInUp} className="lg:col-span-1">
-          <Link to="/" className="flex items-center gap-3.5 mb-6 sm:mb-7">
+          <Link to="/" className="flex items-center gap-3.5 mb-7 sm:mb-7">
             <img
               src={footerLogoSrc}
               alt="AK Productions"
@@ -111,7 +111,7 @@ export default function Footer() {
             </div>
           </Link>
 
-          <p className="text-white/60 text-sm sm:text-base leading-relaxed sm:leading-7 mb-6 sm:mb-7 font-body font-light">
+          <p className="text-white/60 text-sm sm:text-base leading-7 sm:leading-7 mb-8 sm:mb-7 font-body font-light">
             Chennai's premier luxury event management company. Creating extraordinary moments that
             become lifelong memories.
           </p>
@@ -135,10 +135,10 @@ export default function Footer() {
 
         {/* Services */}
         <motion.div variants={fadeInUp}>
-          <h4 className="font-display text-xs sm:text-sm font-bold text-white/85 uppercase tracking-[0.22em] mb-6 sm:mb-7">
+          <h4 className="font-display text-xs sm:text-sm font-bold text-white/85 uppercase tracking-[0.22em] mb-7 sm:mb-7">
             Services
           </h4>
-          <ul className="space-y-3.5 sm:space-y-4">
+          <ul className="space-y-4 sm:space-y-4">
             {FOOTER_SERVICES.map(({ label, path }) => (
               <li key={path}>
                 <Link
@@ -155,10 +155,10 @@ export default function Footer() {
 
         {/* Quick Links */}
         <motion.div variants={fadeInUp}>
-          <h4 className="font-display text-xs sm:text-sm font-bold text-white/85 uppercase tracking-[0.22em] mb-6 sm:mb-7">
+          <h4 className="font-display text-xs sm:text-sm font-bold text-white/85 uppercase tracking-[0.22em] mb-7 sm:mb-7">
             Quick Links
           </h4>
-          <ul className="space-y-3.5 sm:space-y-4">
+          <ul className="space-y-4 sm:space-y-4">
             {FOOTER_QUICK_LINKS.map(({ label, path }) => (
               <li key={path}>
                 <Link
@@ -175,10 +175,10 @@ export default function Footer() {
 
         {/* Contact */}
         <motion.div variants={fadeInUp}>
-          <h4 className="font-display text-xs sm:text-sm font-bold text-white/85 uppercase tracking-[0.22em] mb-6 sm:mb-7">
+          <h4 className="font-display text-xs sm:text-sm font-bold text-white/85 uppercase tracking-[0.22em] mb-7 sm:mb-7">
             Contact
           </h4>
-          <div className="space-y-4 sm:space-y-5">
+          <div className="space-y-5 sm:space-y-5">
             <a
               href={`tel:${phone.replace(/\s+/g, '')}`}
               className="flex items-start gap-3.5 group"
@@ -231,7 +231,7 @@ export default function Footer() {
       <div className="h-px bg-white/8" />
 
       {/* ── Bottom Bar ── */}
-      <div className="container-luxury py-6 sm:py-7 flex flex-col items-center justify-center gap-4 sm:flex-row sm:justify-between">
+      <div className="container-luxury px-5 sm:px-6 py-8 sm:py-7 flex flex-col items-center justify-center gap-4 sm:flex-row sm:justify-between">
         <div className="flex items-center gap-2 text-white/40">
           <Gem size={11} className="text-brand-gold/60" />
           <p className="text-xs sm:text-sm font-body">
