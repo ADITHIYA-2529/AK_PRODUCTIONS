@@ -102,7 +102,7 @@ export default function Services() {
       />
 
       {/* ── Category Filter Bar ── */}
-      <section className="py-5 border-b border-brand-border bg-white sticky top-[76px] z-30 shadow-float-sm">
+      <section className="py-4 sm:py-5 border-b border-brand-border bg-white sticky top-[64px] sm:top-[76px] z-30 shadow-float-sm">
         <div className="container-luxury">
           <div className="flex gap-2.5 overflow-x-auto pb-1 scrollbar-hide">
             {categoriesToUse.map(cat => {
@@ -179,7 +179,7 @@ export default function Services() {
               Why <span className="text-gradient-gold">Choose Us</span>
             </h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 text-center">
             {[
               { title: 'All Under One Roof', desc: 'No need to coordinate multiple vendors — we handle everything from décor to catering.', icon: Layers },
               { title: '10+ Years Experience', desc: 'A decade of expertise delivering flawless events across all categories.', icon: CheckCircle2 },

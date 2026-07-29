@@ -56,7 +56,7 @@ export default function EMISection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7, delay: 0.1 }}
-            className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-brand-heading"
+            className="font-display text-2xl sm:text-4xl md:text-5xl font-bold text-brand-heading"
           >
             Easy EMI <span className="text-gradient-gold">Available</span>
           </motion.h2>

@@ -100,7 +100,7 @@ export default function WhyChooseUs() {
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
               whileHover={{ y: -6 }}
-              className="why-card rounded-4xl p-8 group cursor-default shadow-card hover:shadow-card-hover hover:border-brand-gold/30 transition-all duration-400"
+              className="why-card rounded-4xl p-6 sm:p-8 group cursor-default shadow-card hover:shadow-card-hover hover:border-brand-gold/30 transition-all duration-400"
             >
               {/* Icon + Stat Row */}
               <div className="flex items-start justify-between mb-5">

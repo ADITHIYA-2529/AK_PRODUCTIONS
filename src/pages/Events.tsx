@@ -88,9 +88,9 @@ export default function Events() {
       />
 
       {/* STATS STRIP */}
-      <section className="py-10 border-b border-brand-border bg-brand-section">
+      <section className="py-8 sm:py-10 border-b border-brand-border bg-brand-section">
         <div className="container-luxury">
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-10 sm:gap-20">
+          <div className="grid grid-cols-2 sm:flex sm:flex-row items-center justify-center gap-6 sm:gap-20">
             {[
               { value: `${allEvents.length || '500'}+`, label: 'Events Executed' },
               { value: '10+', label: 'Years Experience' },
@@ -105,8 +105,8 @@ export default function Events() {
                 transition={{ delay: i * 0.08 }}
                 className="text-center"
               >
-                <div className="font-display text-3xl font-bold text-gradient-gold">{value}</div>
-                <div className="text-brand-body text-[11px] uppercase tracking-widest mt-1 font-body">{label}</div>
+                <div className="font-display text-2xl sm:text-3xl font-bold text-gradient-gold">{value}</div>
+                <div className="text-brand-body text-[10px] sm:text-[11px] uppercase tracking-widest mt-1 font-body">{label}</div>
               </motion.div>
             ))}
           </div>

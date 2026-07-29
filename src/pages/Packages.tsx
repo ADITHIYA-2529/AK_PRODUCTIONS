@@ -50,7 +50,7 @@ export default function Packages() {
             highlight="Perfect Fit"
             subtitle="All packages include dedicated event coordination and can be fully customised to your requirements."
           />
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {packages.map((pkg, i) => (
               <PackageCard key={pkg.id} pkg={pkg} index={i} />
             ))}

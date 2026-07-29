@@ -82,14 +82,14 @@ export default function Navbar() {
               <img
                 src={navLogoSrc}
                 alt="AK Productions"
-                className="w-16 h-16 md:w-[70px] md:h-[70px] rounded-full object-cover shadow-float-sm border border-brand-border/60"
+                className="w-10 h-10 sm:w-14 sm:h-14 md:w-[70px] md:h-[70px] rounded-full object-cover shadow-float-sm border border-brand-border/60"
                 loading="lazy"
               />
             </div>
             <div className="leading-none">
-              <div className="font-display text-2xl md:text-3xl font-bold text-brand-heading tracking-tight">
+              <div className="font-display text-lg sm:text-2xl md:text-3xl font-bold text-brand-heading tracking-tight">
                 <span>AK</span>
-                <span className="text-brand-gold ml-1.5">PRODUCTIONS</span>
+                <span className="text-brand-gold ml-1">PRODUCTIONS</span>
               </div>
             </div>
           </Link>
@@ -149,7 +149,7 @@ export default function Navbar() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: '100%' }}
             transition={{ duration: 0.28, ease: [0.25, 0.46, 0.45, 0.94] }}
-            className="fixed inset-0 z-40 bg-white flex flex-col pt-24 pb-10 overflow-y-auto"
+            className="fixed inset-0 z-40 bg-white flex flex-col pt-20 pb-8 overflow-y-auto"
           >
             {/* Gold top line */}
             <div className="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-brand-gold to-transparent" />

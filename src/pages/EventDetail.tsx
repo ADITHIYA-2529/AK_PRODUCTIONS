@@ -250,7 +250,7 @@ export default function EventDetail() {
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 1] }}
-        className="relative h-[480px] md:h-[540px] w-full flex items-center justify-center overflow-hidden rounded-b-[40px] md:rounded-b-[56px] shadow-float-lg bg-brand-bg"
+        className="relative h-[380px] sm:h-[480px] md:h-[540px] w-full flex items-center justify-center overflow-hidden rounded-b-[28px] sm:rounded-b-[40px] md:rounded-b-[56px] shadow-float-lg bg-brand-bg"
       >
         {/* Parallax Hero Image */}
         <div className="absolute inset-0 w-full h-full overflow-hidden">
@@ -265,13 +265,13 @@ export default function EventDetail() {
         </div>
 
         {/* Hero Content */}
-        <div className="container-luxury relative z-20 text-center flex flex-col items-center justify-center pt-16">
+        <div className="container-luxury relative z-20 text-center flex flex-col items-center justify-center pt-10 sm:pt-16">
           {/* Breadcrumb Navigation */}
           <motion.nav
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="flex items-center gap-2 mb-4 font-body text-xs font-semibold uppercase tracking-widest"
+            className="flex items-center gap-2 mb-4 font-body text-xs font-semibold uppercase tracking-widest flex-wrap justify-center"
           >
             <Link to="/" className="text-white/70 hover:text-brand-gold transition-colors">
               Home
@@ -290,7 +290,7 @@ export default function EventDetail() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1 }}
             style={{ textShadow: '0 5px 25px rgba(0,0,0,0.4)' }}
-            className="font-display text-3xl md:text-5xl lg:text-6xl font-extrabold uppercase tracking-wide leading-tight mb-4 select-none bg-gradient-to-r from-[#F8E8B0] via-[#E6C97A] via-[#C8A24A] to-[#9B6A18] bg-clip-text text-transparent max-w-4xl"
+            className="font-display text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold uppercase tracking-wide leading-tight mb-4 select-none bg-gradient-to-r from-[#F8E8B0] via-[#E6C97A] via-[#C8A24A] to-[#9B6A18] bg-clip-text text-transparent max-w-4xl px-2"
           >
             {event.title}
           </motion.h1>

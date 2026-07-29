@@ -107,7 +107,7 @@ export default function Gallery() {
       </section>
 
       {/* ── Filter Pills ── */}
-      <section className="py-5 border-b border-brand-border bg-white sticky top-[76px] z-30 shadow-float-sm">
+      <section className="py-4 sm:py-5 border-b border-brand-border bg-white sticky top-[64px] sm:top-[76px] z-30 shadow-float-sm">
         <div className="container-luxury">
           <div className="flex gap-2.5 overflow-x-auto pb-1 scrollbar-hide">
             {categoriesToUse.map(cat => {

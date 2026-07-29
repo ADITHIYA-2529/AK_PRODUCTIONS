@@ -65,7 +65,7 @@ export default function FAQ() {
       </section>
 
       {/* Category Tabs */}
-      <section className="py-5 border-b border-brand-border bg-white sticky top-[72px] z-30 shadow-sm">
+      <section className="py-4 sm:py-5 border-b border-brand-border bg-white sticky top-[64px] sm:top-[72px] z-30 shadow-sm">
         <div className="container-luxury">
           <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-hide">
             {faqCategories.map(cat => (

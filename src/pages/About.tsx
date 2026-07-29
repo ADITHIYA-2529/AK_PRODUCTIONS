@@ -158,7 +158,7 @@ export default function About() {
 
             <motion.div variants={fadeInLeft} initial="hidden" whileInView="visible" viewport={{ once: true }}>
               <SectionEyebrow>{title}</SectionEyebrow>
-              <h2 className="font-display text-3xl md:text-4xl font-bold text-brand-heading mb-6">{heading}</h2>
+              <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-brand-heading mb-6">{heading}</h2>
               <div className="space-y-4 text-brand-body leading-relaxed font-light">
                 {description ? (
                   description.split('\n\n').map((pText: string, idx: number) => <p key={idx}>{pText}</p>)
@@ -189,9 +189,9 @@ export default function About() {
                   </div>
                 ))}
               </div>
-              <div className="absolute bottom-2 sm:-bottom-6 right-2 sm:-right-6 bg-white rounded-3xl p-4 sm:p-5 text-center border border-brand-border shadow-float">
-                <div className="font-display text-2xl sm:text-3xl font-bold text-gradient-gold">{yearsCount}+</div>
-                <div className="text-brand-body text-[10px] sm:text-xs mt-1">Years of Excellence</div>
+              <div className="absolute bottom-2 sm:-bottom-6 right-2 sm:-right-6 bg-white rounded-3xl p-3 sm:p-5 text-center border border-brand-border shadow-float max-w-[120px] sm:max-w-none">
+                <div className="font-display text-xl sm:text-3xl font-bold text-gradient-gold">{yearsCount}+</div>
+                <div className="text-brand-body text-[9px] sm:text-xs mt-1">Years of Excellence</div>
               </div>
             </motion.div>
           </div>
@@ -281,7 +281,7 @@ export default function About() {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
               >
-                <div className="font-display text-4xl md:text-5xl font-bold text-gradient-gold mb-2">
+                <div className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-gradient-gold mb-2">
                   <AnimatedCounter end={val} suffix={suf} />
                 </div>
                 <div className="text-brand-body/65 text-sm font-body font-medium">{label}</div>
@@ -305,7 +305,7 @@ export default function About() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="relative pl-14 sm:pl-16 pb-8 sm:pb-10 last:pb-0"
+                className="relative pl-12 sm:pl-16 pb-8 sm:pb-12 last:pb-0"
               >
                 {/* Year bubble */}
                 <div className="absolute left-0 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white border-2 border-brand-gold/40 shadow-card flex items-center justify-center text-brand-gold text-[11px] sm:text-xs font-bold">

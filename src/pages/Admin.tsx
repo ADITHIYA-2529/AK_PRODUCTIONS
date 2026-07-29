@@ -6,18 +6,18 @@ export default function Admin() {
   const hostedStudioUrl = 'https://fulbugms.sanity.studio'
 
   return (
-    <div className="bg-brand-bg text-brand-body min-h-[90vh] py-28 overflow-hidden">
+    <div className="bg-brand-bg text-brand-body min-h-[90vh] py-20 sm:py-28 overflow-hidden">
       <div className="container-luxury max-w-4xl">
         
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-12 sm:mb-16">
           <div className="inline-flex items-center gap-2 mb-4 bg-brand-gold/10 px-4 py-2 rounded-full border border-brand-gold/20">
             <Settings size={14} className="text-brand-gold animate-spin" style={{ animationDuration: '6s' }} />
             <span className="text-brand-gold text-xs uppercase tracking-widest font-semibold">
               Content Control Center
             </span>
           </div>
-          <h1 className="font-display text-4xl md:text-5xl font-bold text-brand-heading">
+          <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-brand-heading">
             Admin <span className="text-gradient-gold">Dashboard</span>
           </h1>
           <p className="text-brand-body mt-4 max-w-lg mx-auto font-body font-light">

@@ -251,7 +251,7 @@ export default function Contact() {
               ) : (
                 <form
                   onSubmit={handleSubmit(onSubmit)}
-                  className="bg-white rounded-4xl p-8 border border-brand-border shadow-float space-y-5"
+                  className="bg-white rounded-4xl p-6 sm:p-8 border border-brand-border shadow-float space-y-5"
                 >
                   <div>
                     <h2 className="font-display text-2xl text-brand-heading font-bold mb-1">Send a Message</h2>

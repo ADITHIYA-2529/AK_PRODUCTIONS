@@ -146,7 +146,7 @@ export default function Home() {
       {/* ══════════════════════════════════════════
           1 · HERO — Split Two-Column Layout
           ══════════════════════════════════════════ */}
-      <section className="relative min-h-screen flex items-center overflow-hidden pt-28 pb-16">
+      <section className="relative min-h-screen flex items-center overflow-hidden pt-24 pb-12">
 
         {/* Soft warm background gradient */}
         <div className="absolute inset-0 bg-gradient-to-br from-brand-bg via-brand-bg to-brand-section" />
@@ -154,7 +154,7 @@ export default function Home() {
         <div className="absolute top-0 right-0 w-[700px] h-[700px] bg-[radial-gradient(ellipse_at_top_right,rgba(200,162,74,0.08)_0%,transparent_65%)] pointer-events-none" />
         {/* Decorative gold curved SVG lines */}
         <svg
-          className="absolute right-0 top-1/2 -translate-y-1/2 w-[540px] h-[540px] opacity-[0.07] pointer-events-none"
+          className="absolute right-0 top-1/2 -translate-y-1/2 w-[300px] h-[300px] sm:w-[540px] sm:h-[540px] opacity-[0.07] pointer-events-none"
           viewBox="0 0 540 540" fill="none"
         >
           <circle cx="270" cy="270" r="220" stroke="#C8A24A" strokeWidth="1.5" />
@@ -165,7 +165,7 @@ export default function Home() {
         </svg>
 
         <div className="container-luxury relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 xl:gap-20 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 xl:gap-20 items-center">
 
             {/* ── Left: Text ── */}
             <div className="order-2 lg:order-1">
@@ -187,7 +187,7 @@ export default function Home() {
                 initial={{ opacity: 0, y: 28 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.1 }}
-                className="font-display text-4xl sm:text-5xl xl:text-6xl font-bold text-brand-heading leading-[1.08] mb-6"
+                className="font-display text-3xl sm:text-5xl xl:text-6xl font-bold text-brand-heading leading-[1.08] mb-5"
               >
                 {heroTitle.split(' ').map((word: string, i: number) =>
                   i === heroTitle.split(' ').length - 1
@@ -201,7 +201,7 @@ export default function Home() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.15 }}
-                  className="text-brand-body text-base md:text-lg leading-relaxed mb-10 font-body font-light max-w-xl"
+                  className="text-brand-body text-sm sm:text-base md:text-lg leading-relaxed mb-8 font-body font-light max-w-xl"
                 >
                   {heroSubtitle}
                 </motion.p>
@@ -223,7 +223,7 @@ export default function Home() {
                 initial={{ opacity: 0, y: 18 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.3 }}
-                className="flex flex-col sm:flex-row gap-4 mb-12"
+                className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-10"
               >
                 <Link to="/events" className="btn-gold font-bold">
                   {heroButtonText} <ArrowRight size={15} />
@@ -238,7 +238,7 @@ export default function Home() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.9, delay: 0.45 }}
-                className="grid grid-cols-2 sm:grid-cols-4 gap-5"
+                className="grid grid-cols-2 gap-4"
               >
                 {[
                   { value: eventsCount, label: 'Events Completed' },
@@ -265,8 +265,8 @@ export default function Home() {
               <div className="relative w-full max-w-[520px]">
 
                 {/* Gold circle accent (large) */}
-                <div className="absolute right-0 sm:-right-8 top-0 sm:-top-8 w-64 h-64 rounded-full border border-brand-gold/18 bg-brand-gold/3 animate-float-slow pointer-events-none" />
-                <div className="absolute left-0 sm:-left-4 bottom-0 sm:-bottom-6 w-40 h-40 rounded-full border border-brand-gold/12 bg-brand-gold/2 pointer-events-none" />
+                <div className="absolute -right-2 sm:-right-8 top-0 sm:-top-8 w-48 sm:w-64 h-48 sm:h-64 rounded-full border border-brand-gold/18 bg-brand-gold/3 animate-float-slow pointer-events-none" />
+                <div className="absolute -left-2 sm:-left-4 bottom-0 sm:-bottom-6 w-32 sm:w-40 h-32 sm:h-40 rounded-full border border-brand-gold/12 bg-brand-gold/2 pointer-events-none" />
 
                 {/* Image */}
                 <div className="hero-image-frame animate-float relative z-10">
@@ -284,7 +284,7 @@ export default function Home() {
                   initial={{ opacity: 0, x: -20, y: 10 }}
                   animate={{ opacity: 1, x: 0, y: 0 }}
                   transition={{ duration: 0.7, delay: 0.8 }}
-                  className="floating-badge absolute left-2 sm:-left-8 top-16 z-20 px-3.5 sm:px-4 py-2.5 sm:py-3 flex items-center gap-2 sm:gap-2.5"
+                  className="floating-badge absolute left-1 sm:-left-8 top-14 sm:top-16 z-20 px-3 sm:px-4 py-2 sm:py-3 flex items-center gap-2 sm:gap-2.5"
                 >
                   <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-brand-gold flex items-center justify-center flex-shrink-0">
                     <Award size={14} className="text-white" />
@@ -300,7 +300,7 @@ export default function Home() {
                   initial={{ opacity: 0, x: 20, y: 10 }}
                   animate={{ opacity: 1, x: 0, y: 0 }}
                   transition={{ duration: 0.7, delay: 1.0 }}
-                  className="floating-badge absolute right-2 sm:-right-6 bottom-16 sm:bottom-24 z-20 px-3.5 sm:px-4 py-2.5 sm:py-3 flex items-center gap-2 sm:gap-2.5"
+                  className="floating-badge absolute right-1 sm:-right-6 bottom-14 sm:bottom-24 z-20 px-3 sm:px-4 py-2 sm:py-3 flex items-center gap-2 sm:gap-2.5"
                 >
                   <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-brand-gold flex items-center justify-center flex-shrink-0">
                     <Trophy size={14} className="text-white" />
@@ -316,7 +316,7 @@ export default function Home() {
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.7, delay: 1.2 }}
-                  className="floating-badge absolute right-2 sm:right-4 top-2 sm:-top-6 z-20 px-3 sm:px-4 py-2 sm:py-2.5 flex items-center gap-2"
+                  className="floating-badge absolute right-1 sm:right-4 top-1 sm:-top-6 z-20 px-2.5 sm:px-4 py-1.5 sm:py-2.5 flex items-center gap-1.5 sm:gap-2"
                 >
                   <div className="flex -space-x-1.5">
                     {[0, 1, 2].map(i => (
@@ -703,7 +703,7 @@ export default function Home() {
             </div>
 
             {/* Contact info row */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-8 pt-8 border-t border-brand-border">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-5 sm:gap-8 pt-8 border-t border-brand-border">
               <a href={`tel:${phone.replace(/\s+/g, '')}`} className="flex items-center gap-2 text-brand-body hover:text-brand-gold transition-colors text-sm font-body font-medium">
                 <Phone size={14} className="text-brand-gold" /> {phone}
               </a>

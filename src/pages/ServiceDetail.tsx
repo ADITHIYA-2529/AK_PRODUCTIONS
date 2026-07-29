@@ -86,7 +86,7 @@ export default function ServiceDetail() {
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 1] }}
-        className="relative h-[480px] md:h-[520px] w-full flex items-center justify-center overflow-hidden rounded-b-[40px] md:rounded-b-[56px] shadow-float-lg bg-brand-bg"
+        className="relative h-[380px] sm:h-[480px] md:h-[520px] w-full flex items-center justify-center overflow-hidden rounded-b-[28px] sm:rounded-b-[40px] md:rounded-b-[56px] shadow-float-lg bg-brand-bg"
       >
         {/* Parallax Image Wrapper */}
         <div className="absolute inset-0 w-full h-full overflow-hidden">
@@ -128,7 +128,7 @@ export default function ServiceDetail() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
             style={{ textShadow: '0 5px 25px rgba(0,0,0,0.35)' }}
-            className="font-display text-4xl md:text-[50px] font-extrabold uppercase tracking-wide leading-tight mb-4 select-none bg-gradient-to-r from-[#F8E8B0] via-[#E6C97A] via-[#C8A24A] to-[#9B6A18] bg-clip-text text-transparent"
+            className="font-display text-2xl sm:text-4xl md:text-[50px] font-extrabold uppercase tracking-wide leading-tight mb-4 select-none bg-gradient-to-r from-[#F8E8B0] via-[#E6C97A] via-[#C8A24A] to-[#9B6A18] bg-clip-text text-transparent px-2"
           >
             {service.name}
           </motion.h1>
@@ -166,14 +166,14 @@ export default function ServiceDetail() {
       {/* Description */}
       <section className="section bg-brand-bg">
         <div className="container-luxury">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
             <div className="lg:col-span-2">
               <div className="flex items-center gap-3 mb-6">
                 <span className="gold-line" />
                 <span className="text-brand-gold text-xs uppercase tracking-widest font-semibold">About This Service</span>
               </div>
               <p className="text-brand-body text-lg leading-relaxed mb-8">{service.longDescription}</p>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {service.features.map((feat) => (
                   <div key={feat} className="flex items-center gap-2.5">
                     <Check size={14} className="text-brand-gold flex-shrink-0" />
@@ -313,7 +313,7 @@ export default function ServiceDetail() {
                   onClick={() => setOpenFaq(openFaq === faq.id ? null : faq.id)}
                   className="w-full flex items-center justify-between p-5 text-left"
                 >
-                  <span className="text-brand-heading font-medium text-sm">{faq.question}</span>
+          <span className="text-brand-heading font-medium text-sm pr-2 leading-snug">{faq.question}</span>
                   <ChevronDown size={16} className={`text-brand-gold transition-transform flex-shrink-0 ml-4 ${openFaq === faq.id ? 'rotate-180' : ''}`} />
                 </button>
                 {openFaq === faq.id && (

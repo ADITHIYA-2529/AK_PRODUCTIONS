@@ -64,9 +64,9 @@ export default function Footer() {
 
       {/* ── Pre-footer CTA ── */}
       <div className="relative border-b border-white/8">
-        <div className="container-luxury py-12 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="container-luxury py-10 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
           <div>
-            <h3 className="font-display text-2xl md:text-3xl font-bold text-white leading-tight">
+            <h3 className="font-display text-xl sm:text-2xl md:text-3xl font-bold text-white leading-tight">
               Ready to create something{' '}
               <span className="text-brand-gold">extraordinary?</span>
             </h3>
@@ -199,7 +199,7 @@ export default function Footer() {
               <div className="w-8 h-8 rounded-full bg-brand-gold/12 border border-brand-gold/22 flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:bg-brand-gold transition-all duration-300">
                 <Mail size={13} className="text-brand-gold group-hover:text-white transition-colors" />
               </div>
-              <span className="text-white/70 text-sm font-body hover:text-brand-gold transition-colors">{email}</span>
+              <span className="text-white/70 text-sm font-body hover:text-brand-gold transition-colors break-all">{email}</span>
             </a>
 
             <div className="flex items-start gap-3">
@@ -231,7 +231,7 @@ export default function Footer() {
       <div className="h-px bg-white/8" />
 
       {/* ── Bottom Bar ── */}
-      <div className="container-luxury py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <div className="container-luxury py-5 flex flex-col items-center justify-center gap-3 sm:flex-row sm:justify-between">
         <div className="flex items-center gap-2 text-white/35">
           <Gem size={10} className="text-brand-gold/50" />
           <p className="text-xs font-body">

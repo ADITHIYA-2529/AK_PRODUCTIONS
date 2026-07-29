@@ -105,7 +105,7 @@ export default function ProcessSteps() {
                 <h3 className="font-display text-lg text-brand-heading font-semibold mb-3 group-hover:text-brand-gold transition-colors duration-300">
                   {title}
                 </h3>
-                <p className="text-brand-body text-sm leading-relaxed max-w-[220px] mx-auto">{desc}</p>
+                <p className="text-brand-body text-sm leading-relaxed max-w-xs sm:max-w-[220px] mx-auto">{desc}</p>
               </motion.div>
             ))}
           </div>
