@@ -27,6 +27,7 @@ export default defineType({
         source: 'title',
         maxLength: 96,
       },
+      validation: Rule => Rule.required(),
     }),
 
     defineField({

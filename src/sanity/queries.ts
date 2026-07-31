@@ -13,9 +13,19 @@ export const ALL_SERVICES_QUERY = `*[_type == "service"] | order(displayOrder as
 
 export const SERVICE_DETAIL_QUERY = `*[_type == "service" && slug.current == $slug][0]`;
 
-export const HOME_GALLERY_QUERY = `*[_type == "gallery"] | order(displayOrder asc, date desc)[0...6]`;
+export const HOME_GALLERY_QUERY = `*[_type == "gallery"] | order(displayOrder asc, date desc)[0...6] {
+  _id, title, category, aspectRatio, altText, description, displayOrder, featured,
+  mediaType,
+  image,
+  "videoUrl": video.asset->url
+}`;
 
-export const ALL_GALLERY_QUERY = `*[_type == "gallery"] | order(displayOrder asc, date desc, _createdAt desc)`;
+export const ALL_GALLERY_QUERY = `*[_type == "gallery"] | order(displayOrder asc, date desc, _createdAt desc) {
+  _id, title, category, aspectRatio, altText, description, displayOrder, featured,
+  mediaType,
+  image,
+  "videoUrl": video.asset->url
+}`;
 
 export const HOME_EVENTS_QUERY = `*[_type == "event"] | order(date desc)[0...3] {
   _id, title, subtitle, category, coverImage, bannerImage, images,

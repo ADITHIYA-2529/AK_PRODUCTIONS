@@ -79,11 +79,17 @@ export default function Home() {
       if (settingsData) setSiteSettings(settingsData)
       if (servicesData?.length) setFeaturedServices(servicesData)
       if (galleryData?.length) {
-        setGalleryItems(galleryData.map((item: any) => ({
-          id: item._id, src: urlFor(item.image).url(),
-          category: item.category || 'Other', title: item.title || '',
-          aspectRatio: item.aspectRatio || 'square',
-        })))
+        setGalleryItems(galleryData
+          .filter((item: any) => item.image || item.videoUrl)
+          .map((item: any) => ({
+            id: item._id,
+            src: item.image ? urlFor(item.image).url() : '',
+            videoUrl: item.videoUrl || '',
+            mediaType: (item.mediaType === 'video' ? 'video' : 'image') as 'image' | 'video',
+            category: item.category || 'Other',
+            title: item.title || '',
+            aspectRatio: (item.aspectRatio || 'square') as 'square' | 'portrait' | 'landscape',
+          })))
       }
       if (eventsData?.length) {
         setPreviewEvents(eventsData.map((e: any) => ({
@@ -524,10 +530,23 @@ export default function Home() {
                   }`}
               >
                 <div className={`overflow-hidden ${i === 0 ? 'aspect-[4/3] md:aspect-square' : 'aspect-square'}`}>
-                  <img
-                    src={item.src} alt={item.title} loading="lazy"
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-108"
-                  />
+                  {(item as any).mediaType === 'video' ? (
+                    <video
+                      src={(item as any).videoUrl}
+                      muted
+                      loop
+                      playsInline
+                      preload="metadata"
+                      onMouseEnter={e => (e.currentTarget as HTMLVideoElement).play()}
+                      onMouseLeave={e => { const v = e.currentTarget as HTMLVideoElement; v.pause(); v.currentTime = 0 }}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                  ) : (
+                    <img
+                      src={item.src} alt={item.title} loading="lazy"
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-108"
+                    />
+                  )}
                 </div>
                 <div className="absolute inset-0 bg-brand-heading/0 group-hover:bg-brand-heading/50 transition-all duration-400 flex flex-col justify-end p-4">
                   <span className="opacity-0 group-hover:opacity-100 transition-opacity text-sm text-white font-body font-medium truncate">

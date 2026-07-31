@@ -9,7 +9,7 @@ import { urlFor } from '@/sanity/image'
 import { getEventBySlug, getEventById } from '@/sanity/queries'
 import { PORTFOLIO_ITEMS, PortfolioItem } from '@/data/portfolio'
 import GalleryLightbox from '@/components/shared/GalleryLightbox'
-import { sendRegistrationEmail } from '@/services/emailService'
+
 
 export default function EventDetail() {
   const { slug } = useParams<{ slug: string }>()
@@ -17,20 +17,7 @@ export default function EventDetail() {
   const [loading, setLoading] = useState(true)
   const [lightboxOpen, setLightboxOpen] = useState(false)
   const [lightboxIndex, setLightboxIndex] = useState(0)
-  const [registerModalOpen, setRegisterModalOpen] = useState(false)
 
-  // Registration Form State
-  const [formData, setFormData] = useState({
-    fullName: '',
-    email: '',
-    phone: '',
-    college: '',
-    participants: 1,
-    message: '',
-  })
-  const [errors, setErrors] = useState<Record<string, string>>({})
-  const [submitting, setSubmitting] = useState(false)
-  const [submitStatus, setSubmitStatus] = useState<{ type: 'success' | 'error'; message: string } | null>(null)
 
   const containerRef = useRef<HTMLDivElement>(null)
   const { scrollY } = useScroll()
@@ -44,7 +31,6 @@ export default function EventDetail() {
     }
 
     setLoading(true)
-    setSubmitStatus(null)
 
     // Try fetching by slug first, then by ID, then fallback to local static data
     getEventBySlug(slug)
@@ -113,104 +99,7 @@ export default function EventDetail() {
     }
   }
 
-  // Form Validation
-  const validateForm = () => {
-    const newErrors: Record<string, string> = {}
 
-    if (!formData.fullName.trim()) {
-      newErrors.fullName = 'Full Name is required'
-    }
-
-    if (!formData.email.trim()) {
-      newErrors.email = 'Email Address is required'
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim())) {
-      newErrors.email = 'Please enter a valid email address'
-    }
-
-    if (!formData.phone.trim()) {
-      newErrors.phone = 'Phone Number is required'
-    } else if (!/^[0-9+\s-]{8,15}$/.test(formData.phone.trim())) {
-      newErrors.phone = 'Please enter a valid phone number'
-    }
-
-    if (!formData.college.trim()) {
-      newErrors.college = 'College / Organization is required'
-    }
-
-    if (!formData.participants || formData.participants < 1) {
-      newErrors.participants = 'Number of participants must be at least 1'
-    }
-
-    setErrors(newErrors)
-    return Object.keys(newErrors).length === 0
-  }
-
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = e.target
-    setFormData((prev) => ({
-      ...prev,
-      [name]: name === 'participants' ? Math.max(1, parseInt(value) || 1) : value,
-    }))
-    if (errors[name]) {
-      setErrors((prev) => ({ ...prev, [name]: '' }))
-    }
-  }
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!event) return
-
-    if (!validateForm()) {
-      return
-    }
-
-    setSubmitting(true)
-    setSubmitStatus(null)
-
-    try {
-      const res = await sendRegistrationEmail({
-        fullName: formData.fullName.trim(),
-        email: formData.email.trim(),
-        phone: formData.phone.trim(),
-        college: formData.college.trim(),
-        participants: formData.participants,
-        message: formData.message.trim(),
-        eventId: event.id,
-        eventName: event.title,
-        eventDate: event.date,
-        eventTitle: event.title,
-      })
-
-      if (res.success) {
-        setSubmitStatus({
-          type: 'success',
-          message: 'Thank you! Your registration request has been submitted successfully.',
-        })
-        setFormData({
-          fullName: '',
-          email: '',
-          phone: '',
-          college: '',
-          participants: 1,
-          message: '',
-        })
-      } else {
-        setSubmitStatus({
-          type: 'error',
-          message: res.message || 'Failed to submit registration. Please try again.',
-        })
-      }
-    } catch (err: any) {
-      setSubmitStatus({
-        type: 'error',
-        message: 'An unexpected error occurred. Please try again later.',
-      })
-    } finally {
-      setSubmitting(false)
-    }
-  }
 
   if (loading) {
     return (
@@ -308,21 +197,7 @@ export default function EventDetail() {
             </motion.p>
           )}
 
-          {/* Register CTA Button in Hero */}
-          <motion.div
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.35 }}
-            className="flex items-center gap-4"
-          >
-            <button
-              onClick={() => setRegisterModalOpen(true)}
-              className="btn-gold font-bold px-8 py-3.5 shadow-lg text-sm flex items-center gap-2 group"
-            >
-              <Sparkles size={16} className="group-hover:rotate-12 transition-transform" />
-              Register Now
-            </button>
-          </motion.div>
+
         </div>
       </motion.section>
 
@@ -504,17 +379,7 @@ export default function EventDetail() {
                   )}
                 </div>
 
-                {/* Main Register Button */}
-                <button
-                  onClick={() => setRegisterModalOpen(true)}
-                  className="btn-gold w-full text-center justify-center py-3.5 text-xs font-bold uppercase tracking-wider shadow-md mb-3"
-                >
-                  Register Now <ArrowRight size={14} />
-                </button>
 
-                <p className="text-[11px] text-center text-brand-body/60 font-body">
-                  Instant registration • No payment required
-                </p>
               </div>
             </div>
           </div>
@@ -528,240 +393,6 @@ export default function EventDetail() {
         initialIndex={lightboxIndex}
         onClose={() => setLightboxOpen(false)}
       />
-
-      {/* REGISTRATION MODAL */}
-      <AnimatePresence>
-        {registerModalOpen && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
-            {/* Backdrop */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setRegisterModalOpen(false)}
-              className="fixed inset-0 bg-black/60 backdrop-blur-sm"
-            />
-
-            {/* Modal Dialog */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              transition={{ duration: 0.3 }}
-              className="relative w-full max-w-xl bg-white rounded-3xl shadow-2xl border border-brand-border overflow-hidden z-10 my-8"
-            >
-              {/* Modal Header */}
-              <div className="bg-brand-section px-6 py-5 border-b border-brand-border flex items-center justify-between">
-                <div>
-                  <div className="text-[11px] font-body font-bold text-brand-gold uppercase tracking-wider">
-                    Event Registration
-                  </div>
-                  <h3 className="font-display text-lg sm:text-xl text-brand-heading font-bold truncate max-w-md">
-                    {event.title}
-                  </h3>
-                </div>
-                <button
-                  onClick={() => setRegisterModalOpen(false)}
-                  className="w-9 h-9 rounded-full bg-white border border-brand-border flex items-center justify-center text-brand-body hover:text-brand-heading hover:border-brand-gold transition-colors"
-                >
-                  <X size={18} />
-                </button>
-              </div>
-
-              {/* Modal Form */}
-              <div className="p-6 sm:p-8 max-h-[80vh] overflow-y-auto">
-                {submitStatus?.type === 'success' ? (
-                  <div className="text-center py-8">
-                    <div className="w-16 h-16 rounded-full bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600 mx-auto mb-4">
-                      <CheckCircle2 size={36} />
-                    </div>
-                    <h4 className="font-display text-2xl font-bold text-brand-heading mb-2">
-                      Registration Submitted!
-                    </h4>
-                    <p className="text-brand-body text-sm font-body leading-relaxed max-w-md mx-auto mb-6">
-                      {submitStatus.message}
-                    </p>
-                    <button
-                      onClick={() => {
-                        setRegisterModalOpen(false)
-                        setSubmitStatus(null)
-                      }}
-                      className="btn-gold font-bold px-6 py-2.5 text-xs"
-                    >
-                      Close Window
-                    </button>
-                  </div>
-                ) : (
-                  <form onSubmit={handleSubmit} className="space-y-4">
-                    {submitStatus?.type === 'error' && (
-                      <div className="p-4 rounded-xl bg-red-50 border border-red-200 flex items-start gap-3 text-red-700 text-xs font-body">
-                        <AlertCircle size={16} className="flex-shrink-0 mt-0.5" />
-                        <div>{submitStatus.message}</div>
-                      </div>
-                    )}
-
-                    {/* Full Name */}
-                    <div>
-                      <label className="block text-xs font-body font-semibold uppercase tracking-wider text-brand-heading mb-1.5">
-                        Full Name <span className="text-red-500">*</span>
-                      </label>
-                      <input
-                        type="text"
-                        name="fullName"
-                        value={formData.fullName}
-                        onChange={handleInputChange}
-                        placeholder="Enter your full name"
-                        className={`w-full px-4 py-3 rounded-xl border text-sm font-body bg-brand-bg text-brand-heading focus:outline-none transition-colors ${errors.fullName
-                          ? 'border-red-400 focus:border-red-500'
-                          : 'border-brand-border focus:border-brand-gold'
-                          }`}
-                      />
-                      {errors.fullName && (
-                        <p className="text-red-500 text-[11px] font-body mt-1">
-                          {errors.fullName}
-                        </p>
-                      )}
-                    </div>
-
-                    {/* Email & Phone grid */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      {/* Email */}
-                      <div>
-                        <label className="block text-xs font-body font-semibold uppercase tracking-wider text-brand-heading mb-1.5">
-                          Email Address <span className="text-red-500">*</span>
-                        </label>
-                        <input
-                          type="email"
-                          name="email"
-                          value={formData.email}
-                          onChange={handleInputChange}
-                          placeholder="your.email@example.com"
-                          className={`w-full px-4 py-3 rounded-xl border text-sm font-body bg-brand-bg text-brand-heading focus:outline-none transition-colors ${errors.email
-                            ? 'border-red-400 focus:border-red-500'
-                            : 'border-brand-border focus:border-brand-gold'
-                            }`}
-                        />
-                        {errors.email && (
-                          <p className="text-red-500 text-[11px] font-body mt-1">
-                            {errors.email}
-                          </p>
-                        )}
-                      </div>
-
-                      {/* Phone */}
-                      <div>
-                        <label className="block text-xs font-body font-semibold uppercase tracking-wider text-brand-heading mb-1.5">
-                          Phone Number <span className="text-red-500">*</span>
-                        </label>
-                        <input
-                          type="tel"
-                          name="phone"
-                          value={formData.phone}
-                          onChange={handleInputChange}
-                          placeholder="+91 98765 43210"
-                          className={`w-full px-4 py-3 rounded-xl border text-sm font-body bg-brand-bg text-brand-heading focus:outline-none transition-colors ${errors.phone
-                            ? 'border-red-400 focus:border-red-500'
-                            : 'border-brand-border focus:border-brand-gold'
-                            }`}
-                        />
-                        {errors.phone && (
-                          <p className="text-red-500 text-[11px] font-body mt-1">
-                            {errors.phone}
-                          </p>
-                        )}
-                      </div>
-                    </div>
-
-                    {/* College / Organization & Participants */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      {/* College */}
-                      <div>
-                        <label className="block text-xs font-body font-semibold uppercase tracking-wider text-brand-heading mb-1.5">
-                          College / Organization <span className="text-red-500">*</span>
-                        </label>
-                        <input
-                          type="text"
-                          name="college"
-                          value={formData.college}
-                          onChange={handleInputChange}
-                          placeholder="Institution or company"
-                          className={`w-full px-4 py-3 rounded-xl border text-sm font-body bg-brand-bg text-brand-heading focus:outline-none transition-colors ${errors.college
-                            ? 'border-red-400 focus:border-red-500'
-                            : 'border-brand-border focus:border-brand-gold'
-                            }`}
-                        />
-                        {errors.college && (
-                          <p className="text-red-500 text-[11px] font-body mt-1">
-                            {errors.college}
-                          </p>
-                        )}
-                      </div>
-
-                      {/* Participants */}
-                      <div>
-                        <label className="block text-xs font-body font-semibold uppercase tracking-wider text-brand-heading mb-1.5">
-                          Number of Participants <span className="text-red-500">*</span>
-                        </label>
-                        <input
-                          type="number"
-                          name="participants"
-                          min="1"
-                          value={formData.participants}
-                          onChange={handleInputChange}
-                          className={`w-full px-4 py-3 rounded-xl border text-sm font-body bg-brand-bg text-brand-heading focus:outline-none transition-colors ${errors.participants
-                            ? 'border-red-400 focus:border-red-500'
-                            : 'border-brand-border focus:border-brand-gold'
-                            }`}
-                        />
-                        {errors.participants && (
-                          <p className="text-red-500 text-[11px] font-body mt-1">
-                            {errors.participants}
-                          </p>
-                        )}
-                      </div>
-                    </div>
-
-                    {/* Message (Optional) */}
-                    <div>
-                      <label className="block text-xs font-body font-semibold uppercase tracking-wider text-brand-heading mb-1.5">
-                        Additional Message <span className="text-brand-body/50 text-[10px] lowercase">(optional)</span>
-                      </label>
-                      <textarea
-                        name="message"
-                        rows={3}
-                        value={formData.message}
-                        onChange={handleInputChange}
-                        placeholder="Any special requests or queries?"
-                        className="w-full px-4 py-3 rounded-xl border border-brand-border focus:border-brand-gold text-sm font-body bg-brand-bg text-brand-heading focus:outline-none transition-colors"
-                      />
-                    </div>
-
-                    {/* Submit Button */}
-                    <div className="pt-3">
-                      <button
-                        type="submit"
-                        disabled={submitting}
-                        className="btn-gold w-full text-center justify-center py-3.5 text-xs font-bold uppercase tracking-wider shadow-md flex items-center gap-2"
-                      >
-                        {submitting ? (
-                          <>
-                            <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                            Submitting...
-                          </>
-                        ) : (
-                          <>
-                            Confirm Registration <Send size={14} />
-                          </>
-                        )}
-                      </button>
-                    </div>
-                  </form>
-                )}
-              </div>
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
     </div>
   )
 }

@@ -88,10 +88,26 @@ export default defineType({
     }),
 
     defineField({
+      name: 'gallery',
+      title: 'Gallery Images',
+      type: 'array',
+      of: [{ type: 'image', options: { hotspot: true } }],
+    }),
+
+    defineField({
       name: 'featured',
       title: 'Featured (Show on Home Page Specialties)',
       type: 'boolean',
       initialValue: false,
     }),
   ],
+
+  preview: {
+    select: {
+      title: 'name',
+      subtitle: 'category',
+      media: 'heroImage',
+    },
+  },
 })
+

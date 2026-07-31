@@ -1,8 +1,10 @@
+import { useState } from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
-import { AnimatePresence } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import RootLayout from '@/layouts/RootLayout'
 import { WishlistProvider } from '@/contexts/WishlistContext'
 import ErrorBoundary from '@/components/shared/ErrorBoundary'
+import SplashScreen from '@/components/shared/SplashScreen'
 
 // Primary Pages
 import Home from '@/pages/Home'
@@ -35,38 +37,45 @@ function NotFound() {
 }
 
 export default function App() {
+  const [showSplash, setShowSplash] = useState(true)
+
   return (
     <ErrorBoundary>
       <WishlistProvider>
-        <BrowserRouter>
-          <AnimatePresence mode="wait">
-            <Routes>
-              <Route element={<RootLayout />}>
-                {/* Primary Navigation Pages */}
-                <Route path="/" element={<Home />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/services" element={<Services />} />
-                <Route path="/services/:slug" element={<ServiceDetail />} />
-                <Route path="/gallery" element={<Gallery />} />
-                <Route path="/events" element={<Events />} />
-                <Route path="/events/:slug" element={<EventDetail />} />
-                <Route path="/contact" element={<Contact />} />
+        {showSplash && (
+          <SplashScreen onComplete={() => setShowSplash(false)} />
+        )}
+        <div className="min-h-screen">
+          <BrowserRouter>
+            <AnimatePresence mode="wait">
+              <Routes>
+                <Route element={<RootLayout />}>
+                  {/* Primary Navigation Pages */}
+                  <Route path="/" element={<Home />} />
+                  <Route path="/about" element={<About />} />
+                  <Route path="/services" element={<Services />} />
+                  <Route path="/services/:slug" element={<ServiceDetail />} />
+                  <Route path="/gallery" element={<Gallery />} />
+                  <Route path="/events" element={<Events />} />
+                  <Route path="/events/:slug" element={<EventDetail />} />
+                  <Route path="/contact" element={<Contact />} />
 
-                {/* Legacy redirect: /portfolio → /events */}
-                <Route path="/portfolio" element={<Navigate to="/events" replace />} />
+                  {/* Legacy redirect: /portfolio → /events */}
+                  <Route path="/portfolio" element={<Navigate to="/events" replace />} />
 
-                {/* Secondary Pages */}
-                <Route path="/book-event" element={<BookEvent />} />
-                <Route path="/packages" element={<Packages />} />
-                <Route path="/faq" element={<FAQ />} />
-                <Route path="/admin" element={<Admin />} />
+                  {/* Secondary Pages */}
+                  <Route path="/book-event" element={<BookEvent />} />
+                  <Route path="/packages" element={<Packages />} />
+                  <Route path="/faq" element={<FAQ />} />
+                  <Route path="/admin" element={<Admin />} />
 
-                {/* 404 */}
-                <Route path="*" element={<NotFound />} />
-              </Route>
-            </Routes>
-          </AnimatePresence>
-        </BrowserRouter>
+                  {/* 404 */}
+                  <Route path="*" element={<NotFound />} />
+                </Route>
+              </Routes>
+            </AnimatePresence>
+          </BrowserRouter>
+        </div>
       </WishlistProvider>
     </ErrorBoundary>
   )

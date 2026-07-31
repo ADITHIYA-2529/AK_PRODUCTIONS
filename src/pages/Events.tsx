@@ -166,7 +166,7 @@ export default function Events() {
                     </div>
 
                     <Link to={`/events/${event.slug || event.id}`} className="btn-gold font-bold text-xs">
-                      View Details & Register <ArrowRight size={13} />
+                      View Details <ArrowRight size={13} />
                     </Link>
                   </div>
                 </motion.article>

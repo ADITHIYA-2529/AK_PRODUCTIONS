@@ -102,6 +102,8 @@ export default defineType({
       type: 'array',
       of: [
         {
+          name: 'officeLocation',
+          title: 'Office Location',
           type: 'object',
           fields: [
             { name: 'officeName', title: 'Office Name', type: 'string' },
@@ -111,6 +113,9 @@ export default defineType({
             { name: 'googleMapsUrl', title: 'Google Maps URL', type: 'url' },
             { name: 'workingHours', title: 'Working Hours', type: 'string' },
           ],
+          preview: {
+            select: { title: 'officeName', subtitle: 'address' },
+          },
         },
       ],
     }),

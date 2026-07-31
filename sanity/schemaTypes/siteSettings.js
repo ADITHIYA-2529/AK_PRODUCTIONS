@@ -5,9 +5,6 @@ export default defineType({
   title: 'Site Settings',
   type: 'document',
 
-  // Singleton — only update allowed (no create/delete/duplicate)
-  __experimental_actions: ['update', 'publish'],
-
   groups: [
     { name: 'logos',    title: '🖼️ Logo & Branding' },
     { name: 'heroes',   title: '🌄 Hero Banners'     },
@@ -113,10 +110,11 @@ export default defineType({
     select: {
       media: 'navbarLogo',
     },
-    prepare() {
+    prepare(selection) {
       return {
         title: 'Site Settings',
         subtitle: 'Logo · Hero Banners · SEO Images',
+        media: selection.media,
       }
     },
   },

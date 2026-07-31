@@ -103,6 +103,8 @@ export default defineType({
       type: 'array',
       of: [
         {
+          name: 'valueItem',
+          title: 'Value Item',
           type: 'object',
           fields: [
             { name: 'title', title: 'Value Title', type: 'string' },
@@ -113,6 +115,9 @@ export default defineType({
             },
             { name: 'desc', title: 'Description', type: 'text', rows: 2 },
           ],
+          preview: {
+            select: { title: 'title', subtitle: 'desc' },
+          },
         },
       ],
     }),
@@ -124,12 +129,17 @@ export default defineType({
       type: 'array',
       of: [
         {
+          name: 'timelineItem',
+          title: 'Timeline Milestone',
           type: 'object',
           fields: [
             { name: 'year', title: 'Year (e.g. 2015)', type: 'string' },
             { name: 'title', title: 'Milestone Title', type: 'string' },
             { name: 'desc', title: 'Description', type: 'text', rows: 2 },
           ],
+          preview: {
+            select: { title: 'year', subtitle: 'title' },
+          },
         },
       ],
     }),
@@ -141,6 +151,8 @@ export default defineType({
       type: 'array',
       of: [
         {
+          name: 'teamMember',
+          title: 'Team Member',
           type: 'object',
           fields: [
             { name: 'name', title: 'Full Name', type: 'string' },
@@ -153,6 +165,9 @@ export default defineType({
               options: { hotspot: true },
             },
           ],
+          preview: {
+            select: { title: 'name', subtitle: 'role', media: 'image' },
+          },
         },
       ],
     }),

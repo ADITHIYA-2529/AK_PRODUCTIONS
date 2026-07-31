@@ -123,7 +123,7 @@ export default function Navbar() {
           <div className="flex items-center gap-3">
             <Link
               to="/contact"
-              className="hidden lg:inline-flex btn-gold text-[10px] py-2.5 px-6 font-bold"
+              className="btn-gold text-[10px] py-2.5 px-6 invisible  sm:visible font-bold hidden lg:flex"
             >
               Book Now
             </Link>

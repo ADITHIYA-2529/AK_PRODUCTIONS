@@ -64,6 +64,22 @@ export default defineType({
       initialValue: false,
     }),
 
+    // Media Type
+    defineField({
+      name: 'mediaType',
+      title: 'Media Type',
+      type: 'string',
+      initialValue: 'image',
+      options: {
+        list: [
+          { title: 'Image', value: 'image' },
+          { title: 'Video', value: 'video' },
+        ],
+        layout: 'radio',
+      },
+    }),
+
+    // Image
     defineField({
       name: 'image',
       title: 'Image',
@@ -71,6 +87,37 @@ export default defineType({
       options: {
         hotspot: true,
       },
+      hidden: ({ document }) => document?.mediaType === 'video',
+    }),
+
+    // Video
+    defineField({
+      name: 'video',
+      title: 'Video',
+      type: 'file',
+      options: {
+        accept: 'video/*',
+      },
+      hidden: ({ document }) => document?.mediaType === 'image',
     }),
   ],
+
+  preview: {
+    select: {
+      title: 'title',
+      subtitle: 'category',
+      mediaType: 'mediaType',
+      image: 'image',
+      video: 'video',
+    },
+    prepare(selection) {
+      const { title, subtitle, mediaType, image } = selection
+
+      return {
+        title,
+        subtitle: `${subtitle || ''} • ${mediaType || 'image'}`,
+        media: image,
+      }
+    },
+  },
 })
