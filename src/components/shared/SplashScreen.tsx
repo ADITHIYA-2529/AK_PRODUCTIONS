@@ -258,7 +258,6 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
             transition={{ delay: 2.5, duration: 0.7 }}
             className="mt-3 text-[11px] sm:text-xs uppercase tracking-[0.55rem] text-yellow-100/70 pl-[0.55rem]"
           >
-            Creating Extraordinary Experiences
           </motion.p>
         </motion.div>
       </motion.div>
