@@ -12,7 +12,7 @@ import {
   CheckCircle2, Star, Zap, Shield, Trophy
 } from 'lucide-react'
 import { GALLERY_ITEMS } from '@/constants/gallery'
-import { PORTFOLIO_ITEMS } from '@/data/portfolio'
+import { PORTFOLIO_ITEMS, getEffectiveCategory, isEventUpcoming, getEventDisplayDate, getEventSortTimestamp } from '@/data/portfolio'
 
 // ─── Static fallback services ─────────────────────────────────
 const FALLBACK_PREVIEW_SERVICES = [
@@ -92,13 +92,24 @@ export default function Home() {
           })))
       }
       if (eventsData?.length) {
-        setPreviewEvents(eventsData.map((e: any) => ({
+        const mapped = eventsData.map((e: any) => ({
           id: e._id, title: e.title, subtitle: e.subtitle || '',
-          category: e.category || '',
+          category: getEffectiveCategory({ category: e.category, customCategory: e.customCategory }),
           coverImage: e.coverImage ? urlFor(e.coverImage).url() : '',
-          venue: e.venue || '', date: e.date || '', guests: e.guests || 0,
+          venue: e.venue || '',
+          dateMode: e.dateMode || (e.eventMonth && e.eventYear ? 'month' : 'exact'),
+          date: e.date || '',
+          eventMonth: e.eventMonth || '',
+          eventYear: e.eventYear ? Number(e.eventYear) : undefined,
+          guests: e.guests || 0,
           description: e.description || '', tags: e.tags || [], images: [],
-        })))
+          slug: e.slug || e._id,
+        }))
+        const upcoming = mapped
+          .filter((item: any) => isEventUpcoming(item))
+          .sort((a: any, b: any) => getEventSortTimestamp(a, 'upcoming') - getEventSortTimestamp(b, 'upcoming'))
+        
+        setPreviewEvents(upcoming.length > 0 ? upcoming : mapped)
       }
     }).catch(err => console.error('SANITY ERROR:', err))
   }, [])
@@ -619,11 +630,9 @@ export default function Home() {
                         <MapPin size={11} className="text-brand-gold" /> {item.venue.split(',')[0]}
                       </span>
                     )}
-                    {item.date && (
-                      <span className="flex items-center gap-1.5">
-                        <Calendar size={11} className="text-brand-gold" /> {item.date}
-                      </span>
-                    )}
+                    <span className="flex items-center gap-1.5">
+                      <Calendar size={11} className="text-brand-gold" /> {getEventDisplayDate(item)}
+                    </span>
                   </div>
                   <Link
                     to={`/events/${(item as any).slug || item.id}`}

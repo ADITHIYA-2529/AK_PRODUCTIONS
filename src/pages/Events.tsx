@@ -4,14 +4,15 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { MapPin, Calendar, Users, ArrowRight, Tag, ExternalLink, Clock, Sparkles } from 'lucide-react'
 import { urlFor } from '@/sanity/image'
 import { getAllEvents } from '@/sanity/queries'
-import { PORTFOLIO_ITEMS, PORTFOLIO_CATEGORIES, PortfolioItem } from '@/data/portfolio'
+import {
+  PORTFOLIO_ITEMS,
+  PortfolioItem,
+  getEffectiveCategory,
+  isEventUpcoming,
+  getEventDisplayDate,
+  getEventSortTimestamp
+} from '@/data/portfolio'
 import PageHeader from '@/components/shared/PageHeader'
-
-// ─── Helpers ──────────────────────────────────────────────────
-const fadeUp = {
-  hidden: { opacity: 0, y: 24 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: 'easeOut' } },
-}
 
 // ─────────────────────────────────────────────────────────────
 export default function Events() {
@@ -28,14 +29,19 @@ export default function Events() {
             slug: e.slug || e._id,
             title: e.title,
             subtitle: e.subtitle || '',
-            category: e.category || 'Other',
+            category: getEffectiveCategory({ category: e.category, customCategory: e.customCategory }),
+            customCategory: e.customCategory || '',
             coverImage: e.coverImage ? urlFor(e.coverImage).url() : '',
+            bannerImage: e.bannerImage ? urlFor(e.bannerImage).url() : (e.coverImage ? urlFor(e.coverImage).url() : ''),
             images: e.images?.length ? e.images.map((img: any) => urlFor(img).url()) : [],
             guests: e.guests ?? 0,
             venue: e.venue || '',
             description: e.description || '',
             tags: e.tags || [],
+            dateMode: e.dateMode || (e.eventMonth && e.eventYear ? 'month' : 'exact'),
             date: e.date || '',
+            eventMonth: e.eventMonth || '',
+            eventYear: e.eventYear ? Number(e.eventYear) : undefined,
             time: e.time || '',
             organizer: e.organizer || '',
             registrationDeadline: e.registrationDeadline || '',
@@ -44,16 +50,24 @@ export default function Events() {
           }))
           setAllEvents(mapped)
         } else {
-          // fallback: treat static data as "past", first 2 as "upcoming"
-          const fallback = PORTFOLIO_ITEMS.map((p, i) => ({ ...p, slug: p.slug || p.id, status: i < 2 ? 'upcoming' : 'past', featured: i === 0 }))
-          setAllEvents(fallback as any)
+          // fallback data with custom category & date helper resolution
+          const fallback = PORTFOLIO_ITEMS.map((p) => ({
+            ...p,
+            slug: p.slug || p.id,
+            category: getEffectiveCategory({ category: p.category, customCategory: p.customCategory }),
+          }))
+          setAllEvents(fallback as PortfolioItem[])
         }
         setLoading(false)
       })
       .catch((err) => {
         console.error('SANITY ERROR:', err)
-        const fallback = PORTFOLIO_ITEMS.map((p, i) => ({ ...p, slug: p.slug || p.id, status: i < 2 ? 'upcoming' : 'past', featured: i === 0 }))
-        setAllEvents(fallback as any)
+        const fallback = PORTFOLIO_ITEMS.map((p) => ({
+          ...p,
+          slug: p.slug || p.id,
+          category: getEffectiveCategory({ category: p.category, customCategory: p.customCategory }),
+        }))
+        setAllEvents(fallback as PortfolioItem[])
         setLoading(false)
       })
   }, [])
@@ -66,14 +80,19 @@ export default function Events() {
     )
   }
 
-  const upcomingEvents = allEvents.filter((e: any) => e.status === 'upcoming')
-  const pastEvents = allEvents.filter((e: any) => e.status !== 'upcoming')
-  const featured = allEvents.find((e: any) => e.featured) || allEvents[0]
+  // Dynamic date-based partitioning and sorting
+  const upcomingEvents = allEvents
+    .filter((e) => isEventUpcoming(e))
+    .sort((a, b) => getEventSortTimestamp(a, 'upcoming') - getEventSortTimestamp(b, 'upcoming')) // nearest upcoming event first (ascending)
 
-  // Derive categories dynamically from past events
-  const categories = ['All', ...Array.from(new Set(pastEvents.map(e => e.category))).filter(Boolean)]
+  const pastEvents = allEvents
+    .filter((e) => !isEventUpcoming(e))
+    .sort((a, b) => getEventSortTimestamp(b, 'past') - getEventSortTimestamp(a, 'past')) // most recently completed past event first (descending)
 
-  const filtered = activeCategory === 'All'
+  // Dynamic category tabs based on all events
+  const categoriesToUse = ['All', ...Array.from(new Set(allEvents.map(e => e.category))).filter(Boolean)]
+
+  const filteredPastEvents = activeCategory === 'All'
     ? pastEvents
     : pastEvents.filter(p => p.category === activeCategory)
 
@@ -113,19 +132,19 @@ export default function Events() {
         </div>
       </section>
 
-      {/* UPCOMING EVENTS */}
-      {upcomingEvents.length > 0 && (
-        <section className="section bg-brand-bg">
-          <div className="container-luxury">
-            <div className="flex items-center gap-3 mb-10">
-              <span className="gold-line" />
-              <h2 className="font-display text-2xl md:text-3xl font-bold text-brand-heading">
-                Upcoming <span className="text-gradient-gold">Events</span>
-              </h2>
-            </div>
+      {/* ── SECTION 1: UPCOMING EVENTS ── */}
+      <section className="section bg-brand-bg">
+        <div className="container-luxury">
+          <div className="flex items-center gap-3 mb-8">
+            <span className="gold-line" />
+            <h2 className="font-display text-2xl md:text-3xl font-bold text-brand-heading">
+              Upcoming <span className="text-gradient-gold">Events</span>
+            </h2>
+          </div>
 
+          {upcomingEvents.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-7">
-              {upcomingEvents.map((event: any, i: number) => (
+              {upcomingEvents.map((event: PortfolioItem, i: number) => (
                 <motion.article
                   key={event.id}
                   initial={{ opacity: 0, y: 24 }}
@@ -160,7 +179,7 @@ export default function Events() {
                     <p className="text-brand-body text-sm leading-relaxed font-body mb-5 line-clamp-2">{event.description}</p>
 
                     <div className="flex flex-wrap gap-4 text-[11px] text-brand-body mb-6 font-body">
-                      {event.date && <span className="flex items-center gap-1.5"><Clock size={12} className="text-brand-gold" /> {event.date}</span>}
+                      <span className="flex items-center gap-1.5"><Clock size={12} className="text-brand-gold" /> {getEventDisplayDate(event)}</span>
                       {event.venue && <span className="flex items-center gap-1.5"><MapPin size={12} className="text-brand-gold" /> {event.venue.split(',')[0]}</span>}
                       {event.guests > 0 && <span className="flex items-center gap-1.5"><Users size={12} className="text-brand-gold" /> {event.guests} Guests</span>}
                     </div>
@@ -172,15 +191,120 @@ export default function Events() {
                 </motion.article>
               ))}
             </div>
+          ) : (
+            <div className="text-center py-12 px-6 rounded-2xl border border-brand-border bg-brand-section max-w-md mx-auto">
+              <Calendar className="mx-auto text-brand-gold/40 mb-3" size={36} />
+              <h3 className="font-display text-lg font-bold text-brand-heading mb-1">No Upcoming Events</h3>
+              <p className="text-brand-body text-xs font-body">No upcoming events at the moment. Check back soon for new announcements!</p>
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* ── SECTION 2: PAST EVENTS ── */}
+      <section className="section bg-brand-section border-t border-brand-border">
+        <div className="container-luxury">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+            <div className="flex items-center gap-3">
+              <span className="gold-line" />
+              <h2 className="font-display text-2xl md:text-3xl font-bold text-brand-heading">
+                Past <span className="text-gradient-gold">Events</span>
+              </h2>
+            </div>
+
+            {/* Category Filters for Past Events */}
+            {categoriesToUse.length > 1 && (
+              <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-hide">
+                {categoriesToUse.map(cat => {
+                  const isActive = activeCategory === cat
+                  return (
+                    <button
+                      key={cat}
+                      onClick={() => setActiveCategory(cat)}
+                      className={`flex-shrink-0 flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-300 ${
+                        isActive
+                          ? 'bg-brand-gold text-white shadow-button'
+                          : 'bg-white text-brand-body border border-brand-border hover:border-brand-gold/40 hover:text-brand-heading'
+                      }`}
+                    >
+                      {cat}
+                    </button>
+                  )
+                })}
+              </div>
+            )}
           </div>
-        </section>
-      )}
 
+          <AnimatePresence mode="wait">
+            {filteredPastEvents.length > 0 ? (
+              <motion.div
+                key={activeCategory}
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -16 }}
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+              >
+                {filteredPastEvents.map((event: PortfolioItem, i: number) => (
+                  <motion.article
+                    key={event.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.08 }}
+                    className="group relative overflow-hidden rounded-xl border border-brand-border hover:border-brand-gold/40 transition-all duration-300 bg-white shadow-sm flex flex-col justify-between"
+                  >
+                    <div>
+                      <div className="relative aspect-[4/3] overflow-hidden">
+                        <img
+                          src={event.coverImage}
+                          alt={event.title}
+                          loading="lazy"
+                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-brand-heading/60 via-transparent to-transparent" />
+                        <div className="absolute top-3 left-3 bg-brand-heading/70 backdrop-blur-sm px-2.5 py-1 text-[10px] text-white font-semibold uppercase tracking-widest rounded-full border border-white/20">
+                          {event.category}
+                        </div>
+                      </div>
 
+                      <div className="p-5">
+                        {event.subtitle && (
+                          <p className="text-brand-gold font-accent italic text-xs mb-1 line-clamp-1">{event.subtitle}</p>
+                        )}
+                        <h3 className="font-display text-lg text-brand-heading font-bold mb-2 group-hover:text-brand-gold transition-colors line-clamp-2">
+                          {event.title}
+                        </h3>
+                        <p className="text-brand-body text-xs leading-relaxed mb-4 line-clamp-2">{event.description}</p>
+                      </div>
+                    </div>
 
+                    <div className="p-5 pt-0 border-t border-brand-border/40 flex items-center justify-between text-xs text-brand-body">
+                      <span className="flex items-center gap-1.5 text-[11px]">
+                        <Calendar size={12} className="text-brand-gold" /> {getEventDisplayDate(event)}
+                      </span>
+                      <Link
+                        to={`/events/${event.slug || event.id}`}
+                        className="flex items-center gap-1 text-[11px] font-semibold text-brand-gold hover:underline ml-auto"
+                      >
+                        View Details <ArrowRight size={11} />
+                      </Link>
+                    </div>
+                  </motion.article>
+                ))}
+              </motion.div>
+            ) : (
+              <div className="text-center py-12 px-6 rounded-2xl border border-brand-border bg-white max-w-md mx-auto">
+                <Sparkles className="mx-auto text-brand-gold/40 mb-3" size={36} />
+                <h3 className="font-display text-lg font-bold text-brand-heading mb-1">No Past Events</h3>
+                <p className="text-brand-body text-xs font-body">No past events yet in this category.</p>
+              </div>
+            )}
+          </AnimatePresence>
+        </div>
+      </section>
 
       {/* CONTACT CTA */}
-      <section className="section bg-brand-section border-t border-brand-border">
+      <section className="section bg-brand-bg border-t border-brand-border">
         <div className="container-luxury text-center">
           <motion.div initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
             <h2 className="font-display text-3xl md:text-4xl font-bold text-brand-heading mb-4">

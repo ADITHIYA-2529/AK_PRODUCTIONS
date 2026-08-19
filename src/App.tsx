@@ -21,6 +21,7 @@ import BookEvent from '@/pages/BookEvent'
 import FAQ from '@/pages/FAQ'
 import Packages from '@/pages/Packages'
 import Admin from '@/pages/Admin'
+import Testimonials from '@/pages/Testimonials'
 
 // 404 Not Found
 function NotFound() {
@@ -67,6 +68,7 @@ export default function App() {
                   <Route path="/book-event" element={<BookEvent />} />
                   <Route path="/packages" element={<Packages />} />
                   <Route path="/faq" element={<FAQ />} />
+                  <Route path="/testimonials" element={<Testimonials />} />
                   <Route path="/admin" element={<Admin />} />
 
                   {/* 404 */}

@@ -7,7 +7,7 @@ import {
 } from 'lucide-react'
 import { urlFor } from '@/sanity/image'
 import { getEventBySlug, getEventById } from '@/sanity/queries'
-import { PORTFOLIO_ITEMS, PortfolioItem } from '@/data/portfolio'
+import { PORTFOLIO_ITEMS, PortfolioItem, getEffectiveCategory, isEventUpcoming, getEventDisplayDate } from '@/data/portfolio'
 import GalleryLightbox from '@/components/shared/GalleryLightbox'
 
 
@@ -62,7 +62,8 @@ export default function EventDetail() {
       slug: data.slug || data._id,
       title: data.title,
       subtitle: data.subtitle || '',
-      category: data.category || 'Event',
+      category: getEffectiveCategory({ category: data.category, customCategory: data.customCategory }),
+      customCategory: data.customCategory || '',
       coverImage: data.bannerImage
         ? urlFor(data.bannerImage).url()
         : data.coverImage
@@ -73,7 +74,10 @@ export default function EventDetail() {
       venue: data.venue || 'Venue to be announced',
       description: data.description || 'No detailed description available for this event.',
       tags: data.tags || [],
+      dateMode: data.dateMode || (data.eventMonth && data.eventYear ? 'month' : 'exact'),
       date: data.date || 'Date TBD',
+      eventMonth: data.eventMonth || '',
+      eventYear: data.eventYear ? Number(data.eventYear) : undefined,
       time: data.time || '',
       organizer: data.organizer || 'AK Productions',
       registrationDeadline: data.registrationDeadline || '',
@@ -287,14 +291,12 @@ export default function EventDetail() {
                   <span className="text-xs font-body font-bold uppercase tracking-widest text-brand-gold bg-brand-gold/10 px-3 py-1 rounded-full">
                     {event.category}
                   </span>
-                  {event.status && (
-                    <span className={`text-[11px] font-body font-semibold uppercase tracking-wider px-2.5 py-0.5 rounded-full ${event.status === 'upcoming'
-                      ? 'bg-emerald-50 text-emerald-600 border border-emerald-200'
-                      : 'bg-gray-100 text-gray-600'
-                      }`}>
-                      {event.status === 'upcoming' ? 'Upcoming' : 'Completed'}
-                    </span>
-                  )}
+                  <span className={`text-[11px] font-body font-semibold uppercase tracking-wider px-2.5 py-0.5 rounded-full ${isEventUpcoming(event)
+                    ? 'bg-emerald-50 text-emerald-600 border border-emerald-200'
+                    : 'bg-gray-100 text-gray-600'
+                    }`}>
+                    {isEventUpcoming(event) ? 'Upcoming' : 'Completed'}
+                  </span>
                 </div>
 
                 {/* Key Details List */}
@@ -309,7 +311,7 @@ export default function EventDetail() {
                         Event Date
                       </div>
                       <div className="text-sm font-body font-semibold text-brand-heading">
-                        {event.date}
+                        {getEventDisplayDate(event)}
                       </div>
                     </div>
                   </div>

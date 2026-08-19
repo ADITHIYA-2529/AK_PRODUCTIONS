@@ -22,6 +22,7 @@ const FOOTER_QUICK_LINKS = [
   { label: 'About', path: '/about' },
   { label: 'Gallery', path: '/gallery' },
   { label: 'Events', path: '/events' },
+  { label: 'Testimonials', path: '/testimonials' },
   { label: 'Contact', path: '/contact' },
 ]
 

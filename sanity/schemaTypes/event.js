@@ -44,9 +44,24 @@ export default defineType({
           { title: 'Theme', value: 'Theme' },
           { title: 'Entertainment', value: 'Entertainment' },
           { title: 'School', value: 'School' },
+          { title: 'Custom', value: 'Custom' },
         ],
       },
       validation: Rule => Rule.required(),
+    }),
+
+    defineField({
+      name: 'customCategory',
+      title: 'Custom Category',
+      type: 'string',
+      description: 'Specify your custom category name when Category is set to Custom',
+      hidden: ({ parent }) => parent?.category !== 'Custom',
+      validation: Rule => Rule.custom((customCategory, context) => {
+        if (context?.parent?.category === 'Custom' && (!customCategory || !customCategory.trim())) {
+          return 'Custom Category is required when Category is set to Custom'
+        }
+        return true
+      }),
     }),
 
     defineField({
@@ -85,15 +100,70 @@ export default defineType({
     }),
 
     defineField({
+      name: 'dateMode',
+      title: 'Date Mode',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Exact Date', value: 'exact' },
+          { title: 'Month Only', value: 'month' },
+        ],
+        layout: 'radio',
+      },
+      initialValue: 'exact',
+      description: 'Select whether the event has an exact day date or month/year only.',
+    }),
+
+    defineField({
       name: 'date',
       title: 'Event Date',
       type: 'date',
+      description: 'Select complete event date (required when Date Mode is Exact Date)',
+      hidden: ({ parent }) => parent?.dateMode === 'month',
+    }),
+
+    defineField({
+      name: 'eventMonth',
+      title: 'Event Month',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'January', value: 'January' },
+          { title: 'February', value: 'February' },
+          { title: 'March', value: 'March' },
+          { title: 'April', value: 'April' },
+          { title: 'May', value: 'May' },
+          { title: 'June', value: 'June' },
+          { title: 'July', value: 'July' },
+          { title: 'August', value: 'August' },
+          { title: 'September', value: 'September' },
+          { title: 'October', value: 'October' },
+          { title: 'November', value: 'November' },
+          { title: 'December', value: 'December' },
+        ],
+      },
+      hidden: ({ parent }) => parent?.dateMode !== 'month',
+    }),
+
+    defineField({
+      name: 'eventYear',
+      title: 'Event Year',
+      type: 'number',
+      description: 'e.g. 2026',
+      hidden: ({ parent }) => parent?.dateMode !== 'month',
+      validation: Rule => Rule.custom((eventYear, context) => {
+        if (context?.parent?.dateMode === 'month' && !eventYear) {
+          return 'Event Year is required when Date Mode is Month Only'
+        }
+        return true
+      }),
     }),
 
     defineField({
       name: 'time',
       title: 'Event Time (e.g. 6:00 PM IST)',
       type: 'string',
+      hidden: ({ parent }) => parent?.dateMode === 'month',
     }),
 
     defineField({
@@ -124,8 +194,9 @@ export default defineType({
 
     defineField({
       name: 'status',
-      title: 'Status',
+      title: 'Status (Legacy)',
       type: 'string',
+      description: 'Note: Event Upcoming/Past status is automatically calculated on the website using the event date.',
       options: {
         list: [
           { title: 'Past Event', value: 'past' },
@@ -147,8 +218,22 @@ export default defineType({
   preview: {
     select: {
       title: 'title',
-      subtitle: 'category',
+      category: 'category',
+      dateMode: 'dateMode',
+      date: 'date',
+      eventMonth: 'eventMonth',
+      eventYear: 'eventYear',
       media: 'coverImage',
+    },
+    prepare({ title, category, dateMode, date, eventMonth, eventYear, media }) {
+      const dateDisplay = dateMode === 'month' && eventMonth && eventYear
+        ? `${eventMonth} ${eventYear}`
+        : date || ''
+      return {
+        title,
+        subtitle: `${category || ''}${dateDisplay ? ` • ${dateDisplay}` : ''}`,
+        media,
+      }
     },
   },
 })

@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { ArrowRight, Users, MapPin, Calendar, Tag, ExternalLink } from 'lucide-react'
 import SectionHeading from '@/components/shared/SectionHeading'
-import { PORTFOLIO_ITEMS, PORTFOLIO_CATEGORIES } from '@/data/portfolio'
+import { PORTFOLIO_ITEMS, PORTFOLIO_CATEGORIES, getEventDisplayDate } from '@/data/portfolio'
 import { staggerContainer } from '@/animations/variants'
 import PageHeader from '@/components/shared/PageHeader'
 
@@ -70,7 +70,7 @@ export default function Portfolio() {
                     <MapPin size={12} className="text-gold-400" />{featured.venue.split(',')[0]}
                   </span>
                   <span className="flex items-center gap-1.5">
-                    <Calendar size={12} className="text-gold-400" />{featured.date}
+                    <Calendar size={12} className="text-gold-400" />{getEventDisplayDate(featured)}
                   </span>
                 </div>
 
@@ -191,7 +191,7 @@ export default function Portfolio() {
                         <MapPin size={12} />{item.venue.split(',')[0]}
                       </span>
                       <span className="flex items-center gap-1 ml-auto">
-                        <Calendar size={12} />{item.date}
+                        <Calendar size={12} />{getEventDisplayDate(item)}
                       </span>
                     </div>
                   </div>

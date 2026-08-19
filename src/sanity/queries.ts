@@ -27,30 +27,30 @@ export const ALL_GALLERY_QUERY = `*[_type == "gallery"] | order(displayOrder asc
   "videoUrl": video.asset->url
 }`;
 
-export const HOME_EVENTS_QUERY = `*[_type == "event"] | order(date desc)[0...3] {
-  _id, title, subtitle, category, coverImage, bannerImage, images,
-  guests, venue, date, time, organizer, registrationDeadline,
+export const HOME_EVENTS_QUERY = `*[_type == "event"] | order(date desc) {
+  _id, title, subtitle, category, customCategory, coverImage, bannerImage, images,
+  guests, venue, dateMode, date, eventMonth, eventYear, time, organizer, registrationDeadline,
   description, tags, status, featured,
   "slug": slug.current
 }`;
 
 export const ALL_EVENTS_QUERY = `*[_type == "event"] | order(date desc) {
-  _id, title, subtitle, category, coverImage, bannerImage, images,
-  guests, venue, date, time, organizer, registrationDeadline,
+  _id, title, subtitle, category, customCategory, coverImage, bannerImage, images,
+  guests, venue, dateMode, date, eventMonth, eventYear, time, organizer, registrationDeadline,
   description, tags, status, featured,
   "slug": slug.current
 }`;
 
 export const EVENT_BY_SLUG_QUERY = `*[_type == "event" && slug.current == $slug][0] {
-  _id, title, subtitle, category, coverImage, bannerImage, images,
-  guests, venue, date, time, organizer, registrationDeadline,
+  _id, title, subtitle, category, customCategory, coverImage, bannerImage, images,
+  guests, venue, dateMode, date, eventMonth, eventYear, time, organizer, registrationDeadline,
   description, tags, status, featured,
   "slug": slug.current
 }`;
 
 export const EVENT_BY_ID_QUERY = `*[_type == "event" && _id == $id][0] {
-  _id, title, subtitle, category, coverImage, bannerImage, images,
-  guests, venue, date, time, organizer, registrationDeadline,
+  _id, title, subtitle, category, customCategory, coverImage, bannerImage, images,
+  guests, venue, dateMode, date, eventMonth, eventYear, time, organizer, registrationDeadline,
   description, tags, status, featured,
   "slug": slug.current
 }`;

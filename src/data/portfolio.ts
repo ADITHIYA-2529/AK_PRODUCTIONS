@@ -1,15 +1,28 @@
+import {
+  isEventUpcoming as isEventUpcomingUtil,
+  getEventDisplayDate as getEventDisplayDateUtil,
+  getEventSortTimestamp as getEventSortTimestampUtil,
+  parseEventDate as parseEventDateUtil,
+  EventDateInput
+} from '@/utils/eventDate'
+
 export interface PortfolioItem {
   id: string
   title: string
   subtitle: string
   category: string
+  customCategory?: string
   coverImage: string
+  bannerImage?: string
   images: string[]
   guests: number
   venue: string
   description: string
   tags: string[]
+  dateMode?: 'exact' | 'month' | string
   date: string
+  eventMonth?: string
+  eventYear?: number
   status?: string
   featured?: boolean
   slug?: string
@@ -17,7 +30,6 @@ export interface PortfolioItem {
   organizer?: string
   registrationDeadline?: string
 }
-
 
 export const PORTFOLIO_ITEMS: PortfolioItem[] = [
   {
@@ -39,6 +51,7 @@ export const PORTFOLIO_ITEMS: PortfolioItem[] = [
       'Classical Dance',
       'Mahabalipuram'
     ],
+    dateMode: 'exact',
     date: '20 September 2026',
   },
   {
@@ -61,8 +74,59 @@ export const PORTFOLIO_ITEMS: PortfolioItem[] = [
       'Human Formation',
       'Cultural Event'
     ],
+    dateMode: 'exact',
     date: '3 October 2026',
   }
 ]
 
-export const PORTFOLIO_CATEGORIES = ['All', ...new Set(PORTFOLIO_ITEMS.map(p => p.category))]
+export const PORTFOLIO_CATEGORIES = ['All', ...Array.from(new Set(PORTFOLIO_ITEMS.map(p => getEffectiveCategory(p))))]
+
+/**
+ * Returns current date in YYYY-MM-DD format based on local time.
+ */
+export function getTodayDateString(): string {
+  const d = new Date()
+  const year = d.getFullYear()
+  const month = String(d.getMonth() + 1).padStart(2, '0')
+  const day = String(d.getDate()).padStart(2, '0')
+  return `${year}-${month}-${day}`
+}
+
+/**
+ * Normalizes any date string (ISO YYYY-MM-DD or readable text like "20 September 2026") into YYYY-MM-DD format.
+ */
+export function toIsoDateString(dateStr?: string): string {
+  if (!dateStr) return ''
+  const parsed = parseEventDateUtil({ date: dateStr })
+  if (!parsed) return dateStr.trim()
+  const m = String(parsed.month).padStart(2, '0')
+  const d = String(parsed.day).padStart(2, '0')
+  return `${parsed.year}-${m}-${d}`
+}
+
+/**
+ * Determines whether an event is upcoming (accepts event object or date string).
+ */
+export function isEventUpcoming(input?: string | EventDateInput): boolean {
+  if (!input) return false
+  if (typeof input === 'string') {
+    return isEventUpcomingUtil({ date: input })
+  }
+  return isEventUpcomingUtil(input)
+}
+
+export const getEventDisplayDate = getEventDisplayDateUtil
+export const getEventSortTimestamp = getEventSortTimestampUtil
+export const parseEventDate = parseEventDateUtil
+
+/**
+ * Resolves effective category name (replaces 'Custom' with customCategory if provided).
+ */
+export function getEffectiveCategory(item: { category?: string; customCategory?: string }): string {
+  if (!item) return 'Event'
+  if (item.category === 'Custom' && item.customCategory && item.customCategory.trim()) {
+    return item.customCategory.trim()
+  }
+  return item.category || 'Event'
+}
+
