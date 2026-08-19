@@ -100,7 +100,7 @@ export const SERVICES: Service[] = [
     description: 'Celebrate the arrival of your little one with sweet and dreamy baby shower decorations.',
     longDescription: 'A baby shower is one of life\'s most precious moments. Our baby shower setups are soft, dreamy, and delightfully personalised — from pastel balloon installations to themed dessert tables and gender reveal moments.',
     icon: 'Baby',
-    heroImage: 'https://res.cloudinary.com/gbarhqu6/image/upload/f_auto/q_auto/jonathan-borba-CgWTqYxHEkg-unsplash_yfnotx.jpg',
+    heroImage: 'https://res.cloudinary.com/gbarhqu6/image/upload/f_auto/q_auto/download_13_emnuek.jpg',
     gallery: [
       'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&q=80&auto=format&fit=crop',
       'https://images.unsplash.com/photo-1516627145497-ae6968895b74?w=800&q=80&auto=format&fit=crop',
