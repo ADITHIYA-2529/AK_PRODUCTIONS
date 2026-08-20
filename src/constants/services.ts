@@ -102,7 +102,6 @@ export const SERVICES: Service[] = [
     icon: 'Baby',
     heroImage: 'https://res.cloudinary.com/gbarhqu6/image/upload/f_auto/q_auto/download_13_emnuek.jpg',
     gallery: [
-      'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&q=80&auto=format&fit=crop',
       'https://images.unsplash.com/photo-1516627145497-ae6968895b74?w=800&q=80&auto=format&fit=crop',
       'https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=800&q=80&auto=format&fit=crop',
     ],
